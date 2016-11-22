@@ -74,5 +74,5 @@ $existeGastoMaquina = "SELECT * FROM gastos_maquina where departamento_id=? and 
 $recuperaGastosMaquinaCierre = "SELECT departamento_id,periodo, byn_precio,byn_total,color_unidades, color_precio,color_total, byn_unidades  FROM gastos_maquina WHERE YEAR(periodo) = ? and MONTH(periodo) = ?";
 $recuperaPrecioByNMaquCierre = "select precio from detalle d1 inner join tipo t1 on d1.tipo_id = t1.tipo_id and t1.tipo_desc like '%Blanco%' where d1.descripcion='B/N'";
 $recuperaPrecioColorMaquCierre = "select precio from detalle d1 inner join tipo t1 on d1.tipo_id = t1.tipo_id and t1.tipo_desc like '%Color%' where d1.descripcion like '%Color A4%'";
-
+$recuperaUsuariosConsulta = "select usuario_id, logon, nombre, apellido, role_id from usuario where nombre like ? and apellido like ? and logon like ? and role_id=?";
 ?>

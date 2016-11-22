@@ -22,6 +22,8 @@
 			<li><a href='altaUsuario.php'><span>Nuevo Usuario</span></a></li>
 			<li><a href='modificaUsuario.php'><span>Modificar Usuario</span></a></li>
 			<li><a href='borraUsuario.php'><span>Borrar Usuario</span></a></li>
+			<li><a href='consultaUsuario.php'><span>Consultar Usuario</span></a></li>
+			<li><a href='exportaUsuario.php'><span>Exportar Usuario</span></a></li>
 		</ul>
    </li>
    <li><a href='#'><span>Art&iacute;culos</span></a>
