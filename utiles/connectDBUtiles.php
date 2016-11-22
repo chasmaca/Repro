@@ -1,6 +1,6 @@
 <?php
 
-$mysqlCon = new mysqli("localhost:3306", "jmadrazo", "Acceso01", "229564reproenea");
+$mysqlCon = new mysqli("localhost:3306", "root", "", "229564reproenea");
 
 //$mysqlCon = new mysqli("229564reproenea.mysql.eneasp.com", "229564-jmadrazo", "Chasmaca2015!" , "229564reproenea");
 
