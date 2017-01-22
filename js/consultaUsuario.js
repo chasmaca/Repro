@@ -47,6 +47,7 @@ $(document).ready(function(){
 					/*Pintamos la cabecera de la tabla*/
 					var thead = "<tr><td>Id de Usuario</td><td>Nombre</td><td>Apellidos</td><td>Logon</td><td>Role</td></tr>";
 					$(thead).appendTo($("#tableResultados"));
+					
 					for(var x=0; x<array.length;x++){
 
 						/*Recoger valores*/

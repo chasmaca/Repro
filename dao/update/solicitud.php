@@ -56,8 +56,11 @@ function envioMail($email,$idSolicitud,$comentario){
 	ini_set("sendmail_from", "apps@eneasp.com");
 
 	// título
-	$titulo = 'Su petición de Reprografía ha sido Validada.';
-
+	if ($accion == 1)
+		$titulo = 'Su petición de Reprografía ha sido Validada.';
+	else
+		$titulo = 'Su petición de Reprografía ha sido Rechazada.';
+		
 	
 	$mensaje = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';
 	

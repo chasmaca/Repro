@@ -44,12 +44,12 @@ $consultaUsuarioValidador = "SELECT distinct(departamento_id) FROM usuariodepart
 $consultaTodosTrabajos = "SELECT s1.solicitud_id, d1.departamentos_desc, sd1.subdepartamento_desc, s1.nombre_solicitante, s1.apellidos_solicitante,s1.fecha_alta, s1.fecha_cierre,u1.nombre,u1.apellido, s1.descripcion_solicitante, s1.email_solicitante,s2.status_desc, s1.status_id, s1.fecha_alta from solicitud s1 inner join departamento d1 on s1.departamento_id = d1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id inner join status s2 on s1.status_id = s2.status_id inner join usuario u1 on s1.autorizador_id = u1.usuario_id order by s1.solicitud_id";
 $generaInforme="select d1.treintabarra as codigo, d1.CeCo,t1.departamento_id,d1.departamentos_desc,s1.fecha_cierre, t1.precioByN,t1.precioColor, t1.precioEncuadernacion,t1.PrecioVarios from trabajo t1 inner join departamento d1 on t1.departamento_id = d1.departamento_id inner join solicitud s1 on t1.solicitud_id = s1.solicitud_id and s1.status_id = 6";
 $generaInformeGlobal = "SELECT t1.codigo,t1.CeCo,t1.departamento_id,d1.departamentos_desc,sum(t1.precioByN) as byn,sum(t1.precioColor) as color,sum(t1.precioEncuadernacion) as encuadernacion,sum(t1.PrecioVarios) as varios FROM trabajo t1 INNER JOIN departamento d1 ON t1.departamento_id = d1.departamento_id group by t1.codigo";
-$generaInformeGlobalMes = "SELECT sd1.treintabarra as codigo,d1.CeCo,t1.departamento_id,d1.departamentos_desc,sum(t1.precioByN) as byn,sum(t1.precioColor) as color,sum(t1.precioEncuadernacion) as encuadernacion,sum(t1.PrecioVarios) as varios, sd1.subdepartamento_desc as subdepartamentos_desc FROM trabajo t1 INNER JOIN departamento d1 ON t1.departamento_id = d1.departamento_id INNER JOIN solicitud s1 on t1.solicitud_id = s1.solicitud_id and s1.status_id = 6"; 
+$generaInformeGlobalMes = "SELECT sd1.treintabarra as codigo,d1.CeCo,t1.departamento_id,d1.departamentos_desc,sum(t1.precioByN) as byn,sum(t1.precioColor) as color,sum(t1.precioEncuadernacion) as encuadernacion,sum(t1.PrecioVarios) as varios, gi1.byn_total as impresorasByN, gi1.color_total as impresorasColor, gm1.byn_total as maquinasByN, gm1.color_total as maquinasColor, sd1.subdepartamento_desc as subdepartamentos_desc FROM trabajo t1 INNER JOIN departamento d1 ON t1.departamento_id = d1.departamento_id LEFT OUTER JOIN gastos_impresora gi1 ON t1.departamento_id = gi1.departamento_id LEFT OUTER JOIN gastos_maquina gm1 ON t1.departamento_id = gm1.departamento_id INNER JOIN solicitud s1 on t1.solicitud_id = s1.solicitud_id and s1.status_id = 6"; 
 $recuperaEmail = "select logon from usuario where usuario_id = ?";
 $recuperaTodosDetalles = "select d1.tipo_id as tipoTipoId, d1.detalle_id as detalleId, d1.descripcion as detalleDescripcion, d1.precio as detallePrecio	from detalle d1 where d1.tipo_id = ";
 $consultaTodosTrabajosMes = "SELECT s1.solicitud_id, d1.departamentos_desc,sd1.subdepartamento_desc, s1.nombre_solicitante, s1.apellidos_solicitante,s1.fecha_alta, s1.fecha_cierre, u1.nombre,u1.apellido, s1.descripcion_solicitante, s1.email_solicitante,s2.status_desc, s1.status_id, s1.fecha_alta from solicitud s1 inner join departamento d1 on s1.departamento_id = d1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id inner join status s2 on s1.status_id = s2.status_id inner join usuario u1 on s1.autorizador_id = u1.usuario_id where 1=1 ";
 $generaInformeMes = "select sd1.treintabarra as codigo, d1.CeCo,t1.departamento_id,d1.departamentos_desc,s1.fecha_cierre, t1.precioByN,t1.precioColor, t1.precioEncuadernacion,t1.PrecioVarios, sd1.subdepartamento_desc as subdepartamentos_desc from trabajo t1 inner join departamento d1 on t1.departamento_id = d1.departamento_id inner join solicitud s1 on t1.solicitud_id = s1.solicitud_id and s1.status_id = 6 inner join subdepartamento sd1 on sd1.departamento_id = s1.departamento_id and sd1.subdepartamento_id = s1.subdepartamento_id where  YEAR(s1.fecha_cierre) =";
-$generaInformeMesGestor = "select d1.treintabarra as codigo, d1.CeCo,t1.departamento_id,d1.departamentos_desc,s1.fecha_cierre, t1.precioByN,t1.precioColor, t1.precioEncuadernacion,t1.PrecioVarios	from trabajo t1 inner join departamento d1 on t1.departamento_id = d1.departamento_id inner join solicitud s1 on t1.solicitud_id = s1.solicitud_id and s1.status_id = 6 inner join usuariodepartamento ud1 on d1.departamento_id = ud1.departamento_id and ud1.usuario_id =";
+$generaInformeMesGestor = "select sd1.treintabarra as codigo, d1.CeCo as ceco,t1.departamento_id as departamentoId,d1.departamentos_desc as departamentoDesc,s1.fecha_cierre as fechaCierre, t1.precioByN as byn,t1.precioColor as color, t1.precioEncuadernacion as encuadernacion,t1.PrecioVarios as varios, sd1.subdepartamento_desc as subdepartamentos_desc from trabajo t1 inner join departamento d1 on t1.departamento_id = d1.departamento_id inner join solicitud s1 on t1.solicitud_id = s1.solicitud_id and s1.status_id = 6 inner join subdepartamento sd1 on sd1.departamento_id = s1.departamento_id and sd1.subdepartamento_id = s1.subdepartamento_id where  YEAR(s1.fecha_cierre) =";
 $recuperaDptoXAutorizador = "select distinct(d1.departamento_id) as DEPARTAMENTO_ID, d1.departamentos_desc as DEPARTAMENTOS_DESC from usuario u1 inner join usuariodepartamento ud1 on ud1.usuario_id = u1.usuario_id inner join departamento d1 on ud1.departamento_id = d1.departamento_id where role_id = 3 and u1.usuario_id = ";
 $recuperaDptoXAutorizadorArray = "select d1.departamento_id as DEPARTAMENTO_ID from usuario u1 inner join usuariodepartamento ud1 on ud1.usuario_id = u1.usuario_id inner join departamento d1 on ud1.departamento_id = d1.departamento_id where role_id = 3 and u1.usuario_id = ?";
 $recuperaDptoAlta = "select departamento_id from usuariodepartamento where usuario_id = ? and departamento_id = ?";
@@ -58,7 +58,7 @@ $recuperaRole = "select role_id,role_desc from role";
 $recuperaStatus = "select status_id from solicitud where solicitud_id = ?";
 $recuperaCorreoSolicitud = "select email_solicitante from solicitud where solicitud_id = ?";
 $recuperaAnio = "select distinct(YEAR(fecha_alta)) as fecha_alta from solicitud";
-$recuperaAnioMes = "SELECT YEAR( fecha_alta ) AS anio_alta, MONTH( fecha_alta ) AS mes_alta FROM solicitud GROUP BY anio_alta DESC , mes_alta DESC ";
+$recuperaAnioMes = "SELECT YEAR( fecha_alta ) AS anio_alta, MONTH( fecha_alta ) AS mes_alta FROM solicitud group BY anio_alta , mes_alta ORDER BY anio_alta desc,mes_alta desc";
 $recuperaInformeDetalleValida = "select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = ";
 $recuperaInformeGlobalValida =  "select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, sum(t1.precioEncuadernacion) as encuadernacion, sum(t1.precioByN) as byn, sum(t1.precioColor) as color, sum(t1.PrecioVarios) as varios from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id =";
 $consultaImpresoras = "SELECT IMPRESORA_ID, MODELO, EDIFICIO, UBICACION,FECHA,SERIE,NUMERO FROM impresoras order by UBICACION";
@@ -75,4 +75,116 @@ $recuperaGastosMaquinaCierre = "SELECT departamento_id,periodo, byn_precio,byn_t
 $recuperaPrecioByNMaquCierre = "select precio from detalle d1 inner join tipo t1 on d1.tipo_id = t1.tipo_id and t1.tipo_desc like '%Blanco%' where d1.descripcion='B/N'";
 $recuperaPrecioColorMaquCierre = "select precio from detalle d1 inner join tipo t1 on d1.tipo_id = t1.tipo_id and t1.tipo_desc like '%Color%' where d1.descripcion like '%Color A4%'";
 $recuperaUsuariosConsulta = "select usuario_id, logon, nombre, apellido, role_id from usuario where nombre like ? and apellido like ? and logon like ? and role_id=?";
+
+$generaInformeGlobalMesAdmin = "SELECT 
+									d1.departamento_id, d1.departamentos_desc, 
+									round(i1.byn_total+i1.color_total,2) as totalImpresoras,
+									round(m1.byn_total+m1.color_total,2) as totalMaquinas,
+									round(sum(t1.precioByN),2) as byn, 
+									round(sum(t1.precioColor),2) as color, 
+									round(sum(t1.precioEncuadernacion),2) as encuadernacion, 
+									round(sum(t1.PrecioVarios),2) as varios 
+								FROM
+									departamento d1
+										LEFT OUTER JOIN 
+											gastos_impresora i1 on 
+												i1.departamento_id = d1.departamento_id and 
+												month(i1.periodo) = ? and 
+												YEAR(i1.periodo) = ?
+										LEFT OUTER JOIN 
+											gastos_maquina m1 on 
+												m1.departamento_id=d1.departamento_id and 
+												month(m1.periodo) = ? and 
+												YEAR(m1.periodo) = ?
+										LEFT OUTER JOIN 
+											trabajo t1 on 
+												t1.departamento_id = d1.departamento_id
+                                                and t1.solicitud_id in (
+                                                    select 
+                                                    	solicitud_id 
+                                                    from
+                                                    	solicitud 
+                                                    where 
+                                                    	status_id = 6 and 
+                                                    	month(fecha_cierre) = ? and 
+                                                    	YEAR(fecha_cierre) = ?)
+								WHERE d1.departamento_id like ?
+								GROUP BY d1.departamento_id";
+
+$generaInformeGlobalMesGestor = "SELECT 
+									d1.departamento_id, d1.departamentos_desc, 
+									round(i1.byn_total+i1.color_total,2) as totalImpresoras,
+									round(m1.byn_total+m1.color_total,2) as totalMaquinas,
+									round(sum(t1.precioByN),2) as byn, 
+									round(sum(t1.precioColor),2) as color, 
+									round(sum(t1.precioEncuadernacion),2) as encuadernacion, 
+									round(sum(t1.PrecioVarios),2) as varios 
+								FROM
+									departamento d1
+										LEFT OUTER JOIN 
+											gastos_impresora i1 on 
+												i1.departamento_id = d1.departamento_id and 
+												month(i1.periodo) = ? and 
+												YEAR(i1.periodo) = ?
+										LEFT OUTER JOIN 
+											gastos_maquina m1 on 
+												m1.departamento_id=d1.departamento_id and 
+												month(m1.periodo) = ? and 
+												YEAR(m1.periodo) = ?
+										LEFT OUTER JOIN 
+											trabajo t1 on 
+												t1.departamento_id = d1.departamento_id
+                                                and t1.solicitud_id in (
+                                                    select 
+                                                    	solicitud_id 
+                                                    from
+                                                    	solicitud 
+                                                    where 
+                                                    	status_id = 6 and 
+                                                    	month(fecha_cierre) = ? and 
+                                                    	YEAR(fecha_cierre) = ?)
+								WHERE d1.departamento_id like ?
+								GROUP BY d1.departamento_id";
+
+$generaInformeDetalleMesGestor = "SELECT	
+									sd1.treintabarra as codigo,
+									d1.CeCo as ceco,					
+									t1.departamento_id as departamento_id,
+								    d1.departamentos_desc,
+									ROUND(t1.precioByN,2) as byn,
+									ROUND(t1.precioColor,2) as color,
+									ROUND(t1.precioEncuadernacion,2) as encuadernacion,
+									ROUND(t1.PrecioVarios,2) as varios,
+								    sd1.subdepartamento_desc as subdepartamentos_desc,
+									'0' as gastosImpresoras
+								FROM
+									trabajo t1
+										INNER JOIN departamento d1 ON t1.departamento_id = d1.departamento_id
+										INNER JOIN solicitud s1 on t1.solicitud_id = s1.solicitud_id
+								        inner join subdepartamento sd1 on d1.departamento_id = sd1.departamento_id and sd1.subdepartamento_id = s1.subdepartamento_id
+								WHERE
+									YEAR(s1.fecha_cierre) = ? and
+									month(s1.fecha_cierre) = ? and
+								    s1.status_id = 6 and
+									s1.departamento_id like ? AND
+								    s1.subdepartamento_id like ?
+								UNION 
+								SELECT	
+									'Impresora' as codigo,
+									'Impresoras' as ceco,					
+									d1.departamento_id as departamento_id,
+								    d1.departamentos_desc,
+									'0' as byn,
+									'0' as color,
+									'0' as encuadernacion,
+									'0' as varios,
+								    'Impresoras' as subdepartamentos_desc,
+									round(i1.byn_total+i1.color_total,2) as gastosImpresoras
+								FROM
+									departamento d1
+										INNER JOIN gastos_impresora i1 ON i1.departamento_id = d1.departamento_id
+								WHERE
+									YEAR(i1.periodo) = ? and
+									month(i1.periodo) = ? and
+									d1.departamento_id = ?";
 ?>

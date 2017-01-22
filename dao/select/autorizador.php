@@ -8,8 +8,6 @@ function recuperaTodosValidadores($mysqlCon){
 	
 	global $todosAutorizadoresQuery;
 
-	mysql_query("SET NAMES 'utf8'");
-	
 	$autorizadorResult = mysqli_query($mysqlCon,$todosAutorizadoresQuery);
 
 	if (!$autorizadorResult) {

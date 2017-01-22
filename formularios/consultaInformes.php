@@ -27,7 +27,8 @@ $tipoInforme = 0;
 $resultValida = null;
 $periodoCombo = "";
 $departamentoCombo = "";
-$recuperaInforme = null;
+$recuperaInformeArray = array();
+$recuperaInforme = "";
 
 if( isset($_POST['anioParam']) && isset($_POST['depParametro']) && isset($_POST['informeParam']) && isset($_POST['subdptoParametro']) ){
 	$anio = htmlspecialchars($_POST["anioParam"]);
@@ -37,7 +38,7 @@ if( isset($_POST['anioParam']) && isset($_POST['depParametro']) && isset($_POST[
 	
 	
 	if ($tipoInforme == 'global')
-		$recuperaInforme = recuperaInformesGlobalMesAdmin($mysqlCon,$anio,$dpto, $subdpto);
+		$recuperaInformeArray = recuperaInformesGlobalMesAdmin($mysqlCon,$anio,$dpto, $subdpto);
 	
 	if ($tipoInforme == 'detalle')
 		$recuperaInforme = recuperaInformesMesAdmin($mysqlCon,$anio,$dpto, $subdpto);
@@ -112,9 +113,9 @@ if (!empty($_POST["subdepartamento"])){
 			include_once($pathCabecera);
 			include_once($pathMenu);
 ?>
-			<div id="cuerpo">
+			<div id="cuerpo" style="width: 100%;">
 			
-				<form name="informeAdmin" id="informeAdmin" method="post" action="">
+				<form name="informeAdmin" id="informeAdmin" method="post" action="" style="width: 100%;">
 
 					<input type="hidden" name="depParametro" id="depParametro" value="<?php echo $dpto;?>">
 					<input type="hidden" name="subdptoParametro" id="subdptoParametro"  value="<?php echo $subdpto;?>">
@@ -241,12 +242,14 @@ if (!empty($_POST["subdepartamento"])){
 					<table border="1" id="tablaInforme" style="width:100%;">
 						<thead>
 							<tr>
-								<th>ESB</th>
 								<th>CODIGO</th>
 								<th>DEPARTAMENTO</th>
-								<th>SUBDEPARTAMENTO</th>
 								<?php if ($tipoInforme == 'detalle') { ?>
 								<th>FECHA DE CIERRE</th>
+								<?php } ?>
+								<?php if ($tipoInforme != 'detalle') { ?>
+								<th>GASTOS IMPRESORA </th>
+								<th>GASTOS MAQUINAS </th>
 								<?php } ?>
 								<th>BLANCO Y NEGRO</th>
 								<th>COLOR</th>
@@ -257,25 +260,31 @@ if (!empty($_POST["subdepartamento"])){
 						</thead>
 <?php 
 						$totalFinal = 0;
-						if ($recuperaInforme!=null){
-							while ($fila = mysqli_fetch_assoc($recuperaInforme)) {
-								
-								if ($tipoInforme == 'global'){
-									$total = $fila['byn'] + $fila['color'] + $fila['encuadernacion'] + $fila['varios'];
+				
+						if ($recuperaInforme!=null || $recuperaInformeArray!=null){
+							if ($tipoInforme == 'global'){
+								foreach ($recuperaInformeArray as $fila ){
+									
+									$total = $fila['byn'] + $fila['color'] + $fila['encuadernacion'] + $fila['varios'] + $fila['totalImpresoras'] + $fila['totalMaquinas'];
 ?>
 										<tbody>
 										<tr>
-											<td id="solESB"><?php echo $fila['codigo'];?></td>
-											<td id="solCEC"><?php echo $fila['CeCo'];?></td>
+											<td id="solESB"><?php echo $fila['departamento_id'];?></td>
 											<td id="solDPT"><?php echo $fila['departamentos_desc'];?></td>
-											<td id="solDPT"><?php echo $fila['subdepartamentos_desc'];?></td>
+											<?php if ($tipoInforme != 'detalle') { ?>
+											<td id="solI"><?php echo $fila['totalImpresoras'];?></td>
+											<td id="solM"><?php echo $fila['totalMaquinas'];?></td>
+											<?php } ?>
 											<td id="solBYN"><?php echo $fila['byn'];?></td>
 											<td id="solCOL"><?php echo $fila['color'];?></td>
 											<td id="solENC"><?php echo $fila['encuadernacion'];?></td>
 											<td id="solVAR"><?php echo $fila['varios'];?></td>
 											<td id="solTOT"><?php echo $total ?></td>										</tr>
 <?php
+									}
 								}else{
+									
+									while ($fila = mysqli_fetch_assoc($recuperaInforme)) {
 									$total = $fila['precioByN'] + $fila['precioColor'] + $fila['precioEncuadernacion'] + $fila['PrecioVarios'];
 									?>
 									<tbody>
@@ -291,15 +300,17 @@ if (!empty($_POST["subdepartamento"])){
 										<td><?php echo $fila['PrecioVarios'];?></td>
 										<td><?php echo $total ?></td>
 									</tr>
-									<?php 
+									
+<?php 
 									
 								}
 								$totalFinal = $totalFinal + $total;
+								mysqli_free_result($recuperaInforme);
 ?>
 								
 <?php 
 							}
-							mysqli_free_result($recuperaInforme);
+							
 						}
 ?>
 						<tr>

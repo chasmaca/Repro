@@ -58,9 +58,9 @@
 			$dpto = htmlspecialchars($_POST["depParametro"]);
 			$recuperaInforme = recuperaInformesGlobalMes($mysqlCon,$anio,$dpto);
 		}else{
-			$anio = 0;
-			$dpto = 0;
-			$recuperaInforme = null;
+			$anio = "10/2016";
+			$dpto = "265";
+			$recuperaInforme = recuperaInformesGlobalMes($mysqlCon,$anio,$dpto);
 		}
 		
 		$rowCount = 2;

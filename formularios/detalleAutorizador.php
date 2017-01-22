@@ -22,14 +22,14 @@ $usuario = $_SESSION["userId_session"];
 //$resultValida = recuperaDetalleValidador($usuario);
 $resultDepartamento = cargarDptoSession($usuario);
 
-$anio = 0;
-$dpto = 0;
-$subdpto = 0;
-$tipoInforme = 0;
-$resultValida = null;
-$periodoCombo = "";
-$departamentoCombo = "";
-$recuperaInforme = null;
+	$anio = 0;
+	$dpto = 0;
+	$subdpto = 0;
+	$tipoInforme = 0;
+	$resultValida = null;
+	$periodoCombo = "";
+	$departamentoCombo = "";
+	$recuperaInforme = null;
 
 if( isset($_POST['anioParam']) && isset($_POST['depParametro']) && isset($_POST['informeParam']) && isset($_POST['subdptoParametro']) ){
 	$anio = htmlspecialchars($_POST["anioParam"]);

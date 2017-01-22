@@ -27,7 +27,7 @@ include_once($pathClase);
 
 		<form name="realizaTrabajoForm" method="post" action="../index.php" id="realizaTrabajoForm">
 		<h2>Trabajos Pendientes</h2>
-			<table style="width:95%;">
+			<table style="width:95%;" id="trabajosPendientes">
 				<thead>
 					<tr>
 						<th>Id Solicitud</th>

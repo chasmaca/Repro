@@ -51,30 +51,55 @@ function recuperaInformesMesAdmin($mysqlCon, $anio, $dpto,$subdpto){
 		}
 		
 	}else{
-
+		
+		if ($subdpto!=0)
 		$generaInformeMes = $generaInformeMes . " and s1.subdepartamento_id = " . $subdpto;
 
 	}
+	
+	if ($dpto =="aa"){
+		$generaInformeMes .= " UNION
+		select
+		'treintabarra' as codigo, 'ceco',
+		i.departamento_id, concat('Impresoras ', d1.departamentos_desc)  as 'Impresoras', i.periodo,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Impresoras' as subdepartamentos_desc
+		from gastos_impresora i inner join departamento d1 on i.departamento_id=d1.departamento_id  where YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
 
-	$generaInformeMes .= " UNION
-	select
-	'treintabarra' as codigo, 'ceco',
-	i.departamento_id, 'Impresoras', i.periodo,
-	ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
-	0 as encuadernacion,
-	0 as varios,
-	'Impresoras' as subdepartamentos_desc
-	from gastos_impresora i where i.departamento_id = " . $dpto ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+		$generaInformeMes .= " UNION
+		select
+		'treintabarraMaq' as codigo, 'ceco',
+		i.departamento_id, concat('Maquinas ', d1.departamentos_desc)  as Maquinas, i.periodo,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Maquinas' as subdepartamentos_desc
+		from gastos_maquina i inner join departamento d1 on i.departamento_id=d1.departamento_id where YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) =  " . $anioPartido[0];
 
-	$generaInformeMes .= " UNION
-	select
-	'treintabarraMaq' as codigo, 'ceco',
-	i.departamento_id, 'Maquinas', i.periodo,
-	ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
-	0 as encuadernacion,
-	0 as varios,
-	'Maquinas' as subdepartamentos_desc
-	from gastos_maquina i where i.departamento_id = " . $dpto ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+	}else{
+		$generaInformeMes .= " UNION
+		select
+		'treintabarra' as codigo, 'ceco',
+		i.departamento_id, 'Impresoras', i.periodo,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Impresoras' as subdepartamentos_desc
+		from gastos_impresora i where i.departamento_id = " . $dpto ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+			
+		$generaInformeMes .= " UNION
+		select
+		'treintabarraMaq' as codigo, 'ceco',
+		i.departamento_id, 'Maquinas', i.periodo,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Maquinas' as subdepartamentos_desc
+		from gastos_maquina i where i.departamento_id = " . $dpto ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+		
+	}
 
 	$informeResult = mysqli_query($mysqlCon,$generaInformeMes);
 
@@ -177,57 +202,55 @@ function recuperaInformesGlobal($mysqlCon){
 
 function recuperaInformesGlobalMesAdmin($mysqlCon,$anio, $dpto, $subdpto){
 
-	global $generaInformeGlobalMes, $generaInformeGlobal;
-
+	global $generaInformeGlobalMes, $generaInformeGlobalMesAdmin, $arrayData;
+	$arrayData = array();
+	
 	$anioPartido = explode("/",$anio);
 
-	$generaInformeGlobalMes = $generaInformeGlobalMes . " inner join subdepartamento sd1 on sd1.departamento_id = s1.departamento_id and sd1.subdepartamento_id = s1.subdepartamento_id where YEAR(s1.fecha_cierre) = " . $anioPartido[1] . " and month(s1.fecha_cierre) = " . $anioPartido[0];
-
-	if ($dpto != 0 && $dpto != "aa"){
-		$generaInformeGlobalMes = $generaInformeGlobalMes . " and s1.departamento_id = " . $dpto;
+	if ($dpto == 'aa'){
+		$dpto = '%';
 	}
 	
 	
-	if ($subdpto == "aa"){
-
-	}else{
-		if ($subdpto!= 0)
-			$generaInformeGlobalMes = $generaInformeGlobalMes . " and s1.subdepartamento_id = " . $subdpto;
-
-	}
-
-	$generaInformeGlobalMes = $generaInformeGlobalMes . " group by t1.codigo";
-
-	$generaInformeGlobalMes .= " UNION
-	select 
-	'treintabarra' as codigo, 'ceco', 
-	i.departamento_id, 'Impresoras', 
-	ROUND(byn_total,2) as byn, ROUND(color_total,2) as color, 
-	0 as encuadernacion, 
-	0 as varios, 
-	'Impresoras' as subdepartamentos_desc
-	from gastos_impresora i where i.departamento_id = " . $dpto ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
-	
-	$generaInformeGlobalMes .= " UNION
-	select
-	'treintabarraMaq' as codigo, 'ceco',
-	i.departamento_id, 'Maquinas',
-	ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
-	0 as encuadernacion,
-	0 as varios,
-	'Maquinas' as subdepartamentos_desc
-	from gastos_maquina i where i.departamento_id = " . $dpto ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+	if ($stmt = $mysqlCon->prepare($generaInformeGlobalMesAdmin)) {
+		/*Asociacion de parametros*/
+		$stmt->bind_param('sssssss',$anioPartido[0],$anioPartido[1],$anioPartido[0],$anioPartido[1],$anioPartido[0],$anioPartido[1],$dpto);
+		/*Ejecucion de la consulta*/
+		$stmt->execute();
+		
+		/*Almacenamos el resultSet*/
+		$stmt->bind_result($departamento_id,$departamentos_desc,$totalImpresoras, $totalMaquinas, $byn, $color,$encuadernacion, $varios);
 
 	
-	$informeGlobalResult = mysqli_query($mysqlCon,$generaInformeGlobalMes);
+		while($stmt->fetch()) {
 
-	if (!$informeGlobalResult) {
-		echo "No se pudo ejecutar con exito la consulta ($generaInformeGlobalMes) en la BD: " . mysql_error();
-		exit;
+			$tmp = array();
+			$tmp["departamento_id"] = $departamento_id;
+			$tmp["departamentos_desc"] = $departamentos_desc;
+			$tmp["totalImpresoras"] = $totalImpresoras;
+			$tmp["totalMaquinas"] = $totalMaquinas;
+			$tmp["byn"] = $byn;
+			$tmp["color"] = $color;
+			$tmp["encuadernacion"] =$encuadernacion;
+			$tmp["varios"] =$varios;
+			/*Asociamos el resultado en forma de array en el json*/
+			array_push($arrayData, $tmp);
+		}
+		$stmt->close();
+		/*Asociamos el correcto funcionamiento al json para comprobar en el js*/
+		
+		} else {
+			/*Llegamos aqui con error, asociamos false para identificarlo en el js*/
+		//	$jsondata["success"] = false;
+			die("Errormessage: ". $mysqlCon->error);
+		}
+		/*Devolvemos el JSON con los datos de la consulta*/
+// 		header('Content-type: application/json; charset=utf-8');
+// 		echo json_encode($jsondata, JSON_FORCE_OBJECT);
+
+		return $arrayData;
 	}
-
-	return $informeGlobalResult;
-}
+	
 
 function recuperaInformesGlobalMes($mysqlCon,$anio, $dpto, $subdpto){
 
@@ -341,6 +364,8 @@ function recuperaDetalleMesValidador($mysqlCon,$usuario,$anio,$dpto,$subdpto){
 	$recuperaInformeDetalleValida .= " and month(s1.fecha_validacion) = " . $anioPartido[0] . 
 		" and year(s1.fecha_validacion) = " . $anioPartido[1];
 
+	echo $recuperaInformeDetalleValida;
+	exit;
 	$informeResult = mysqli_query($mysqlCon,$recuperaInformeDetalleValida);
 
 	if (!$informeResult) {
