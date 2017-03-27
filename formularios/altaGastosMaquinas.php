@@ -90,7 +90,7 @@ $pathMaquina = "../dao/select/gastoMaquina.php";
 					while ($fila = mysqli_fetch_assoc($departamentoResult)) {
 ?>
 						<tr>
-							<td><?php echo utf8_encode($fila["DEPARTAMENTOS_DESC"]); ?></td>
+							<td><?php echo $fila["ceco"] . " - " . utf8_encode($fila["DEPARTAMENTOS_DESC"]); ?></td>
 							<td>
 								<input class="input" type="text" style="width:90px;" 
 									name="numeroBN_<?php echo $fila["DEPARTAMENTO_ID"]; ?>" 
@@ -102,6 +102,7 @@ $pathMaquina = "../dao/select/gastoMaquina.php";
 									id="precioBN_<?php echo $fila["DEPARTAMENTO_ID"]; ?>"
 									value="<?php echo $precioByN; ?>"/>
 							</td>
+
 							<td>
 								<input class="valor" type="text" readonly style="width:90px;" 
 									name="valorBN_<?php echo $fila["DEPARTAMENTO_ID"]; ?>" 

@@ -8,7 +8,7 @@ include_once($pathDB);
 include_once($pathQuery);
 include_once($pathInsert);
 
-$departamentoDesc = htmlspecialchars($_POST["nombreDepartamento"]);
+$departamentoDesc = utf8_decode(htmlspecialchars($_POST["nombreDepartamento"]));
 $departamentoId = htmlspecialchars($_POST["idDepartamento"]);
 $ceco = htmlspecialchars($_POST["CeCo"]);
 $treinta = htmlspecialchars($_POST["treintabarra"]);

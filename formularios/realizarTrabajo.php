@@ -10,12 +10,16 @@ $pathInsert = "../dao/insert/inserciones.php";
 $pathUpdate = "../dao/update/updates.php";
 $pathCabecera = "../utiles/cabecera_formulario.php";
 $pathClaseModal = "../dao/select/trabajoModal.php";
+$pathSubdpto = "../dao/select/subdepartamento.php";
+
 
 include_once($path);
 include_once($pathClase);
 include_once($pathClaseModal);
 include_once($pathInsert);
 include_once($pathUpdate);
+include_once($pathSubdpto);
+
 
 $usuarioPlantilla = $_SESSION["nombre_session"];
 
@@ -32,6 +36,7 @@ include_once($pathCabecera);
 //actualizaEstado($_GET['solicitudId'], $mysqlCon, 4);
 actualizaEstadoUsuario($_GET['solicitudId'], $mysqlCon, 4, $usuarioPlantilla);
 $departamentoSol = recuperaDepartamento($_GET['solicitudId'],$mysqlCon);
+
 $solicitanteSol = recuperaSolicitante($_GET['solicitudId'],$mysqlCon);
 $recuperaDetalleEspiral = recuperaDetalleEspiral($mysqlCon);
 $recuperaDetalleEncolado = recuperaDetalleEncolado($mysqlCon);
@@ -39,14 +44,16 @@ $recuperaDetalleVarios1 = recuperaDetalleVarios1($mysqlCon);
 $recuperaDetalleColor = recuperaDetalleColor($mysqlCon);
 $recuperaDetalleVarios2 = recuperaDetalleVarios2($mysqlCon);
 $recuperaDetalleByN = recuperaDetalleByN($mysqlCon);
+
 $departamentoNombre = "";
 $departamentoTreinta ="";
 $departamentoCeco = "";
 $departamentoId = "";
 $subdepartamentoNombre = "";
+
 while ($fila0 = mysqli_fetch_assoc($departamentoSol)) {
 	$departamentoNombre = $fila0['DEPARTAMENTOS_DESC'];
-	$subdepartamentoNombre = $fila0['SUBDEPARTAMENTO_DESC'];
+	$subdepartamentoNombre = recuperaSubdepartamentoXId($_GET['solicitudId']);
 	$departamentoTreinta = $fila0['TREINTABARRA'];
 	$departamentoCeco = $fila0['CECO'];
 	$departamentoId = $fila0['DEPARTAMENTO_ID'];

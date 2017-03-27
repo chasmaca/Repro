@@ -76,7 +76,7 @@ include_once($pathMenu);
 				        }
 ?>
 				        >
-				<?php echo $fila["DEPARTAMENTOS_DESC"]; ?>
+				<?php echo utf8_encode($fila["ceco"]) . " - " . utf8_encode($fila["DEPARTAMENTOS_DESC"]); ?>
 				</option>
 <?php 
 				}

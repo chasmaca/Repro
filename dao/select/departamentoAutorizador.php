@@ -1,5 +1,5 @@
 <?php
-$pathQuery = "../dao/select/query.php";
+$pathQuery = "query.php";
 include_once($pathQuery);
 
 function cargarDptoAutorizador($mysqlCon){

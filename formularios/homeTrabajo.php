@@ -50,16 +50,16 @@ include_once($pathClase);
 						<?php echo $fila["solicitud_id"]; ?>
 						</td>
 						<td nowrap>
-						<?php echo $fila["departamentos_desc"]; ?>
+						<?php echo utf8_encode($fila["departamentos_desc"]); ?>
 						</td>
 						<td>
-						<?php echo $fila["nombre_solicitante"]; ?>&nbsp;<?php echo $fila["apellidos_solicitante"]; ?>
+						<?php echo utf8_encode($fila["nombre_solicitante"]); ?>&nbsp;<?php echo utf8_encode($fila["apellidos_solicitante"]); ?>
 						</td>
 						<td nowrap>
 						<?php echo $fila["fecha_alta"]; ?>
 						</td>
 						<td>
-						<?php echo $fila["descripcion_solicitante"]; ?>
+						<?php echo utf8_encode($fila["descripcion_solicitante"]); ?>
 						</td>
 						<td>
 							<a href='realizarTrabajo.php?solicitudId=<?php echo $fila["solicitud_id"]; ?>' style="color:black;">Realizar Trabajo</a>
@@ -98,19 +98,19 @@ include_once($pathClase);
 						<?php echo $fila1["solicitud_id"]; ?>
 						</td>
 						<td>
-						<?php echo $fila1["departamentos_desc"]; ?>
+						<?php echo utf8_encode($fila1["departamentos_desc"]); ?>
 						</td>
 						<td>
-						<?php echo $fila1["nombre_solicitante"]; ?>&nbsp;<?php echo $fila1["apellidos_solicitante"]; ?>
+						<?php echo utf8_encode($fila1["nombre_solicitante"]); ?>&nbsp;<?php echo utf8_encode($fila1["apellidos_solicitante"]); ?>
 						</td>
 						<td nowrap>
 						<?php echo $fila1["fecha_alta"]; ?>
 						</td>
 						<td>
-						<?php echo $fila1["descripcion_solicitante"]; ?>
+						<?php echo utf8_encode($fila1["descripcion_solicitante"]); ?>
 						</td>
 						<td>
-						<?php echo $fila1["usuario_plantilla"]; ?>
+						<?php echo utf8_encode($fila1["usuario_plantilla"]); ?>
 						</td>
 						<td>
 							<a href='realizarTrabajo.php?solicitudId=<?php echo $fila1["solicitud_id"]; ?>' style="color:black;">Realizar Trabajo</a>
@@ -149,16 +149,16 @@ include_once($pathClase);
 						<?php echo $fila2["solicitud_id"]; ?>
 						</td>
 						<td>
-						<?php echo $fila2["departamentos_desc"]; ?>
+						<?php echo utf8_encode($fila2["departamentos_desc"]); ?>
 						</td>
 						<td>
-						<?php echo $fila2["nombre_solicitante"]; ?>&nbsp;<?php echo $fila2["apellidos_solicitante"]; ?>
+						<?php echo utf8_encode($fila2["nombre_solicitante"]); ?>&nbsp;<?php echo utf8_encode($fila2["apellidos_solicitante"]); ?>
 						</td>
 						<td nowrap>
 						<?php echo $fila2["fecha_alta"]; ?>
 						</td>
 						<td>
-						<?php echo $fila2["descripcion_solicitante"]; ?>
+						<?php echo utf8_encode($fila2["descripcion_solicitante"]); ?>
 						</td>
 						<td>
 							<a href='realizarTrabajo.php?solicitudId=<?php echo $fila2["solicitud_id"]; ?>' style="color:black;">Realizar Trabajo</a>

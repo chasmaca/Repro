@@ -185,7 +185,7 @@ else
 				        }
 ?>							
 					>
-					<?php echo utf8_encode($fila["DEPARTAMENTOS_DESC"]); ?></option>
+					<?php echo utf8_encode($fila["CECO"]) . " - " . utf8_encode($fila["DEPARTAMENTOS_DESC"]); ?></option>
 <?php
 				}
 				mysqli_free_result($departamentoResult);

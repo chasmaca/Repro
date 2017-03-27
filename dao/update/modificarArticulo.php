@@ -7,7 +7,7 @@ include_once($pathQuery);
 
 $tipo = $_POST["tipoId"];
 $detalle = $_POST["detalle"];
-$nombre = $_POST["nombreDetalle"];
+$nombre = utf8_decode($_POST["nombreDetalle"]);
 $precio = $_POST["precioDetalle"];
 
 $detalleSimple = explode("-", $detalle);

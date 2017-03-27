@@ -7,12 +7,12 @@ include_once($pathDB);
 include_once($pathInsert);
 include_once($pathUpdate);
 
-$modelo = htmlspecialchars($_POST["modelo"]);
-$edificio = htmlspecialchars($_POST["edificio"]);
-$ubicacion = htmlspecialchars($_POST["ubicacion"]);
+$modelo = utf8_decode(htmlspecialchars($_POST["modelo"]));
+$edificio = utf8_decode(htmlspecialchars($_POST["edificio"]));
+$ubicacion = utf8_decode(htmlspecialchars($_POST["ubicacion"]));
 $fecha = htmlspecialchars($_POST["fecha"]);
-$serie = htmlspecialchars($_POST["serie"]);
-$maquina = htmlspecialchars($_POST["maquina"]);
+$serie = utf8_decode(htmlspecialchars($_POST["serie"]));
+$maquina = utf8_decode(htmlspecialchars($_POST["maquina"]));
 $id= htmlspecialchars($_POST["imprParam"]);
 
 global $sentenciaUpdateImpresoras,$mysqlCon;

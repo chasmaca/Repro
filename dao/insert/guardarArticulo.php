@@ -12,7 +12,7 @@ include_once($pathInsert);
 include_once($pathDetalle);
 
 $tipo = htmlspecialchars($_POST["tipoId"]);
-$descripcion =  htmlspecialchars($_POST["nombreArticulo"]);
+$descripcion =  utf8_decode(htmlspecialchars($_POST["nombreArticulo"]));
 $precio = htmlspecialchars($_POST["precio"]);
 $detalle = recuperaMaximoPorTipo($mysqlCon,$tipo);
 

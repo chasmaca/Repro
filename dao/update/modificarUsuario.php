@@ -16,11 +16,11 @@ include_once($pathUpdate);
 
 include_once($pathSubdpto);
 
-$nombre = htmlspecialchars($_POST["nombre"]);
-$apellido = htmlspecialchars($_POST["apellido"]);
-$logon = htmlspecialchars($_POST["logon"]);
+$nombre = utf8_decode(htmlspecialchars($_POST["nombre"]));
+$apellido = utf8_decode(htmlspecialchars($_POST["apellido"]));
+$logon = utf8_decode(htmlspecialchars($_POST["logon"]));
 $role = htmlspecialchars($_POST["role"]);
-$pwd = htmlspecialchars($_POST["pwd"]);
+$pwd = utf8_decode(htmlspecialchars($_POST["pwd"]));
 $departamentoArray = htmlspecialchars($_POST["dptoArray"]);
 $idUsuario = htmlspecialchars($_POST["id"]);
 

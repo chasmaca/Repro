@@ -6,7 +6,7 @@ $pathUpdate = "updates.php";
 include_once($pathDB);
 include_once($pathUpdate);
 
-$carreraDesc = htmlspecialchars($_POST["nombreCarrera"]);
+$carreraDesc = utf8_decode(htmlspecialchars($_POST["nombreCarrera"]));
 $carreraId = htmlspecialchars($_POST["idCarrera"]);
 
 if ($stmt = $mysqlCon->prepare($sentenciaUpdateCarrera)) {

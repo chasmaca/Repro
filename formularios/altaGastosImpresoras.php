@@ -90,7 +90,7 @@ $pathImpresora = "../dao/select/gastoImpresora.php";
 					while ($fila = mysqli_fetch_assoc($departamentoResult)) {
 ?>
 						<tr>
-							<td><?php echo utf8_encode($fila["DEPARTAMENTOS_DESC"]); ?></td>
+							<td><?php echo $fila["ceco"] . " - " . utf8_encode($fila["DEPARTAMENTOS_DESC"]); ?></td>
 							<td>
 								<input class="input" type="text" style="width:90px;" 
 									name="numeroBN_<?php echo $fila["DEPARTAMENTO_ID"]; ?>" 

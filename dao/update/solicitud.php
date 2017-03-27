@@ -15,7 +15,6 @@ $accion = 0;
 
 $comentario = "";
 
-
 if ($_GET['operacion'] == "A"){
 	$queryActualizaQuery = $updateSolicitudQuery . " status_id = 2, fecha_validacion = now() where solicitud_id = " . $_GET['solicitudId'];
 	$accion = 1;

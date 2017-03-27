@@ -6,7 +6,7 @@ include_once($pathDB);
 include_once($pathUpdate);
 
 $usuario = htmlspecialchars($_POST["email"]);
-$password = htmlspecialchars($_POST["pwd"]);
+$password = utf8_decode(htmlspecialchars($_POST["pwd"]));
 
 global $sentenciaUpdatePassword,$mysqlCon;
 

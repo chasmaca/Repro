@@ -1,163 +1,194 @@
 <?php
-/**
- * PHPExcel
- *
- * Copyright (c) 2006 - 2015 PHPExcel
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- *
- * @category   PHPExcel
- * @package    PHPExcel
- * @copyright  Copyright (c) 2006 - 2015 PHPExcel (http://www.codeplex.com/PHPExcel)
- * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
- * @version    ##VERSION##, ##DATE##
- */
-	
-	date_default_timezone_set("Europe/Madrid");
-	
-	$path  = "../utiles/connectDBUtiles.php";
-	$pathinforme = "../dao/select/consultaInforme.php";
-	
-	require_once '../Classes/PHPExcel.php';
-	include_once($path);
-	include_once($pathinforme);
-	
-	$objPHPExcel = new PHPExcel();
-	$archivo = "phpexcel.xls";
-	
-	$objPHPExcel->getProperties()->setCreator("Eneasp")
-	->setLastModifiedBy("Eneasp")
-	->setTitle("informe")
-	->setSubject("Informe de gastos")
-	->setDescription("Informe de gastos")
-	->setKeywords("Eneasp")
-	->setCategory("");
-		
 
-	if( isset($_POST['anioParam']) && isset($_POST['depParametro']) && isset($_POST['informeParam']) ){
-	
-		$anio = htmlspecialchars($_POST["anioParam"]);
-		$dpto = htmlspecialchars($_POST["depParametro"]);
-		$subdpto = htmlspecialchars($_POST["subdptoParametro"]);
-		$tipoInforme = htmlspecialchars($_POST["informeParam"]);
-	
-	
-		if ($tipoInforme == 'global')
-			$recuperaInforme = recuperaInformesGlobalMesAdmin($mysqlCon,$anio,$dpto,$subdpto);
-	
-		if ($tipoInforme == 'detalle')
-			$recuperaInforme = recuperaInformesMesAdmin($mysqlCon,$anio,$dpto,$subdpto);
-	
-	}else{
-	
-		$anio = 0;
-		$dpto = 0;
-		$tipoInforme = 0;
-		$recuperaInforme = null;
-	}
-	
-	
-	$objPHPExcel->getDefaultStyle()->getFont()->setName('Arial Narrow');
-	$objPHPExcel->getDefaultStyle()->getFont()->setSize(10);
-	
-	$objPHPExcel->getActiveSheet()->getRowDimension('1')->setRowHeight(20);
-	$objPHPExcel->getActiveSheet()->getRowDimension('A')->setRowHeight(20);
-	$objPHPExcel->getActiveSheet()->getRowDimension('B')->setRowHeight(20);
-	
-	$y = 1;
-	if ($tipoInforme == 'detalle') {
-		$objPHPExcel->setActiveSheetIndex(0)
-		->setCellValue("A".$y,'ESB')
-		->setCellValue("B".$y,'CODIGO')
-		->setCellValue("C".$y,'DEPARTAMENTO')
-		->setCellValue("D".$y,'FECHA DE CIERRE')
-		->setCellValue("E".$y,'BLANCO Y NEGRO')
-		->setCellValue("F".$y,'COLOR')
-		->setCellValue("G".$y,'ENCUADERNACIONES')
-		->setCellValue("H".$y,'VARIOS')
-		->setCellValue("I".$y,'TOTAL');
-		
-	}
-	
-	if ($tipoInforme == 'global') {
-		$objPHPExcel->setActiveSheetIndex(0)
-		->setCellValue("A".$y,'ESB')
-		->setCellValue("B".$y,'CODIGO')
-		->setCellValue("C".$y,'DEPARTAMENTO')
-		->setCellValue("D".$y,'BLANCO Y NEGRO')
-		->setCellValue("E".$y,'COLOR')
-		->setCellValue("F".$y,'ENCUADERNACIONES')
-		->setCellValue("G".$y,'VARIOS')
-		->setCellValue("H".$y,'TOTAL');
-		
-	}
-	
-	
-	$objPHPExcel->getActiveSheet()
-	->getStyle('A1:I1')
-	->getFill()
-	->getFillType(PHPExcel_Style_Fill::FILL_SOLID);
-	
-	$borders = array('borders'=>array(
-			'allborders' => array(
-					'style'=>PHPExcel_Style_Border::BORDER_THIN,
-					'color'=>array('argb'=>'FF000000'),
-			)
-	),
-	);
-	
-	$objPHPExcel->getActiveSheet()
-	->getStyle('A1:I1')
-	->applyFromArray($borders);
-	
-	$rowCount = 2;
-	while($fila = mysqli_fetch_assoc($recuperaInforme)){
-		if ($tipoInforme == 'global')
-			$total = $fila['byn'] + $fila['color'] + $fila['encuadernacion'] + $fila['varios'];
-		if ($tipoInforme == 'detalle')
-			$total = $fila['precioByN'] + $fila['precioColor'] + $fila['precioEncuadernacion'] + $fila['PrecioVarios'];
-		
-		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, $fila['codigo']);
-		$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, $fila['CeCo']);
-		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, $fila['departamentos_desc']);
-		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, $fila['subdepartamentos_desc']);
+include ('../dao/select/query.php');
+include '../utiles/connectDBUtiles.php';
 
-		if ($tipoInforme == 'detalle'){
-			$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, $fila['fecha_cierre']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, $fila['precioByN']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, $fila['precioColor']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, $fila['precioEncuadernacion']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, $fila['PrecioVarios']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('I'.$rowCount, $total);
-		}
-		if ($tipoInforme == 'global'){
-			$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, $fila['byn']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, $fila['color']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, $fila['encuadernacion']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, $fila['varios']);
-			$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, $total);
+/*Definimos las variables*/
+$periodo = "";
+$departamento = "";
+$subdepartamento = "";
+$tipoInforme = "";
+
+$periodo = htmlspecialchars($_POST["periodo"]);
+$departamento = htmlspecialchars($_POST["depParametro"]);
+$subdepartamento = htmlspecialchars($_POST["subdptoParametro"]);
+$tipoInforme = htmlspecialchars($_POST["tipoInforme"]);
+
+/*Realizamos la llamada a la funcion*/
+if ($periodo != "" && $departamento != "" && $subdepartamento != "" && $tipoInforme != ""){
+	if ($tipoInforme=='global')
+		recuperaInformesGlobalMesAdmin($periodo, $departamento, $subdepartamento);
+	else
+		recuperaInformesMesAdmin($periodo,$departamento,$subdepartamento);
+}else{
+	echo "No se han recogido los parametros";
+}
+
+
+function recuperaInformesMesAdmin( $anio, $dpto,$subdpto){
+
+	global $generaInformeMes, $mysqlCon;
+
+	$anioPartido = explode("/",$anio);
+	header("Content-Disposition: attachment; filename=Informe_Detallado_Repro.xls");
+	header("Content-Type: application/vnd.ms-excel");
+	$flag = false;
+	$generaInformeMes = $generaInformeMes . $anioPartido[1] . " and month(s1.fecha_cierre) = " . $anioPartido[0];
+
+	if ($dpto != 0 && $dpto != "aa")
+		$generaInformeMes = $generaInformeMes . " and s1.departamento_id = " . $dpto;
+
+
+
+		$resumentSub = "";
+		if ($subdpto == "aa"){
+			if ($dpto =="aa"){
+					
+			}else{
+
+				$subdepartamentoList = recuperaSubXDpto($dpto);
+				//	$subdpto4Usuario = cargarDptoSessionAsArray($usuario);
+				for ($row = 0; $row < sizeof($subdepartamentoList); $row++){
+					if ($resumentSub=="")
+						$resumentSub = $subdepartamentoList[$row][1];
+						else
+							$resumentSub = $resumentSub . "," . $subdepartamentoList[$row][1];
+
+				}
+				$generaInformeMes = $generaInformeMes . " and s1.subdepartamento_id in (" . $resumentSub . ") ";
+
+			}
+
+		}else{
+
+			if ($subdpto!=0)
+				$generaInformeMes = $generaInformeMes . " and s1.subdepartamento_id = " . $subdpto;
+
 		}
 
-		$rowCount++;
+		if ($dpto =="aa"){
+			$generaInformeMes .= " UNION
+		select
+		'treintabarra' as codigo, 'ceco',
+		i.departamento_id, concat('Impresoras ', d1.departamentos_desc)  as 'Impresoras', i.periodo,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Impresoras' as subdepartamentos_desc
+		from gastos_impresora i inner join departamento d1 on i.departamento_id=d1.departamento_id  where YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+
+			$generaInformeMes .= " UNION
+		select
+		'treintabarraMaq' as codigo, 'ceco',
+		i.departamento_id, concat('Maquinas ', d1.departamentos_desc)  as Maquinas, i.periodo,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Maquinas' as subdepartamentos_desc
+		from gastos_maquina i inner join departamento d1 on i.departamento_id=d1.departamento_id where YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) =  " . $anioPartido[0];
+
+		}else{
+			$generaInformeMes .= " UNION
+		select
+		'treintabarra' as codigo, 'ceco',
+		i.departamento_id, 'Impresoras', i.periodo,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Impresoras' as subdepartamentos_desc
+		from gastos_impresora i where i.departamento_id = " . $dpto ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+
+			$generaInformeMes .= " UNION
+		select
+		'treintabarraMaq' as codigo, 'ceco',
+		i.departamento_id, 'Maquinas', i.periodo,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Maquinas' as subdepartamentos_desc
+		from gastos_maquina i where i.departamento_id = " . $dpto ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+
+		}
+
+		$informeResult = mysqli_query($mysqlCon,$generaInformeMes);
+
+
+		while($row = $informeResult->fetch_assoc()) {
+			if(!$flag) {
+				// display field/column names as first row
+				echo implode("\t", array_keys($row)) . "\r\n";
+				$flag = true;
+			}
+			if ($row!=null){
+				//array_walk($row, __NAMESPACE__ . '\cleanData');
+				echo implode("\t", array_values($row)) . "\r\n";
+			}
+		}
+}
+function recuperaInformesGlobalMesAdmin($anio, $dpto, $subdpto){
+
+	global $mysqlCon;
+	header("Content-Disposition: attachment; filename=Informe_Global_Repro.xls");
+	header("Content-Type: application/vnd.ms-excel");
+	$flag = false;
+	$anioPartido = explode("/",$anio);
+
+	if ($dpto == 'aa'){
+		$dpto = '%';
 	}
+
+	$generaInformeMes=
+	"SELECT
+									d1.departamento_id, d1.departamentos_desc,
+									round(i1.byn_total+i1.color_total,2) as totalImpresoras,
+									round(m1.byn_total+m1.color_total,2) as totalMaquinas,
+									round(sum(t1.precioByN),2) as byn,
+									round(sum(t1.precioColor),2) as color,
+									round(sum(t1.precioEncuadernacion),2) as encuadernacion,
+									round(sum(t1.PrecioVarios),2) as varios
+								FROM
+									departamento d1
+										LEFT OUTER JOIN
+											gastos_impresora i1 on
+												i1.departamento_id = d1.departamento_id and
+												month(i1.periodo) = ".$anioPartido[0]." and
+												YEAR(i1.periodo) = ".$anioPartido[1]."
+										LEFT OUTER JOIN
+											gastos_maquina m1 on
+												m1.departamento_id=d1.departamento_id and
+												month(m1.periodo) = ".$anioPartido[0]." and
+												YEAR(m1.periodo) = ".$anioPartido[1]."
+										LEFT OUTER JOIN
+											trabajo t1 on
+												t1.departamento_id = d1.departamento_id
+                                                and t1.solicitud_id in (
+                                                    select
+                                                    	solicitud_id
+                                                    from
+                                                    	solicitud
+                                                    where
+                                                    	status_id = 6 and
+                                                    	month(fecha_cierre) = ".$anioPartido[0]." and
+                                                    	YEAR(fecha_cierre) = ".$anioPartido[1].")
+								WHERE d1.departamento_id like '". $dpto ."'
+								GROUP BY d1.departamento_id";
 	
-	header('Content-Type: application/vnd.ms-excel');
-	header('Content-Disposition: attachment;filename="'.$archivo.'"');
-	header('Cache-Control: max-age=0');
+	$informeResult = mysqli_query($mysqlCon,$generaInformeMes);
 	
-	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel,'Excel5');
-	$objWriter->save('php://output');
+	
+	while($row = $informeResult->fetch_assoc()) {
+	
+		if(!$flag) {
+			// display field/column names as first row
+			echo implode("\t", array_keys($row)) . "\r\n";
+			$flag = true;
+		}
+		if ($row!=null){
+			//array_walk($row, __NAMESPACE__ . '\cleanData');
+			echo implode("\t", array_values($row)) . "\r\n";
+		}
+	}
+}
+
 
 ?>

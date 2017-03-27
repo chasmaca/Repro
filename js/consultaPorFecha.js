@@ -84,9 +84,33 @@ function enviarConsulta(){
 }
 
 function mostramosExcel(){
-	document.forms[0].action = "generaExcelDetalleAuto.php";
-	document.forms[0].submit();
+	var accion = 0;
+	
+	if (document.getElementById('periodo').value=="0" || document.getElementById('periodo').value==null){
+		alert ("Debe Seleccionar el periodo");
+		accion = 1;
+	}
+		
+	if ((document.getElementById('departamento').value=="0" || document.getElementById('departamento').value==null) && accion == 0){
+		alert ("Debe seleccionar el departamento");
+		accion = 1;
+	}
 
+	if ((document.getElementById('subdepartamento').value=="0" || document.getElementById('subdepartamento').value==null) && accion == 0){
+		alert ("Debe Seleccionar el subdepartamento");
+		accion = 1;
+	}
+	
+	elemento = document.getElementById("tipoInforme");
+	if( !elemento.checked ) {
+		alert ("Debe Seleccionar el tipo de informe");
+		accion = 1;
+	}
+	
+	if (accion == 0){
+		document.forms[0].action = "generaExcelDetalleAuto.php";
+		document.forms[0].submit();
+	}
 }
 
 function mostramosExcelGlobal(){

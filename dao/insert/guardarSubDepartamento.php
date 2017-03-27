@@ -8,7 +8,7 @@ include_once($pathQuery);
 include_once($pathInsert);
 
 $departamento = htmlspecialchars($_POST["departamento"]);
-$subDepartamentoDesc = htmlspecialchars($_POST["nombreSubDepartamento"]);
+$subDepartamentoDesc = utf8_decode(htmlspecialchars($_POST["nombreSubDepartamento"]));
 $treinta = htmlspecialchars($_POST["treintabarra"]);
 
 

@@ -9,7 +9,7 @@ include_once($pathDB);
 include_once($pathQuery);
 include_once($pathInsert);
 
-$carrera = htmlspecialchars($_POST["nombreCarrera"]);
+$carrera = utf8_decode(htmlspecialchars($_POST["nombreCarrera"]));
 
 if ($stmt = $mysqlCon->prepare($sentenciaInsertCarrera)) {
 	$stmt->bind_param('s',$carrera);

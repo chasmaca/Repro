@@ -14,11 +14,11 @@ include_once($pathQuery);
 
 //Declaramos las variables
 $departamento = htmlspecialchars($_POST["departamento"]);
-$nombre = htmlspecialchars($_POST["nombre"]);
-$apellidos = htmlspecialchars($_POST["apellidos"]);
+$nombre = utf8_decode(htmlspecialchars($_POST["nombre"]));
+$apellidos = utf8_decode(htmlspecialchars($_POST["apellidos"]));
 $email = htmlspecialchars($_POST["email"]);
 $autorizador = htmlspecialchars($_POST["autorizador"]);
-$observaciones = htmlspecialchars($_POST["comment"]);
+$observaciones = utf8_decode(htmlspecialchars($_POST["comment"]));
 $idSolicitudSQL = mysqli_fetch_assoc($maxSolicitudId);
 $idSolicitud = $idSolicitudSQL["SOLICITUD_MAX"];
 $subdepartamento = htmlspecialchars($_POST["subdepartamento"]);
@@ -56,20 +56,20 @@ if(!empty($my_error)) {
 
 function envioMail($email,$idSolicitud){
 	// destinatario
-	$para  = $email; 
+	$para  = $email;
 	global $nombre;
+	$mensajeValida = "";
+	ini_set("sendmail_from", "apps@eneasp.com");
 	
- 	ini_set("sendmail_from", "apps@eneasp.com");
+	header('Content-Type: text/html; charset=utf-8');
 	
- 	header('Content-Type: text/html; charset=utf-8');
-	
-// 	// título
+	// 	// título
 	$titulo = 'Se ha registrado una nueva solicitud de reprografia.';
 	
-	$mensaje = "<html>";
-	$mensaje .= "<head>";
+	$mensaje = '<html>';
+	$mensaje .= '<head>';
 	$mensaje .= '<meta http-equiv="Content-type" content="text/html; charset=utf-8" />';
-	$mensaje .= "<head>";
+	$mensaje .= '</head>';
 	$mensaje .= '<body>';
 	$mensaje .= '<div style="width:95%;height:85%;background-color:lightgray;">';
 	$mensaje .= '<header style="display:block;">';
@@ -92,9 +92,18 @@ function envioMail($email,$idSolicitud){
 	$mensaje .= '</body>';
 	$mensaje .= '</html>';
 	
- 	// Enviarlo
- 	if (!mail($para, $titulo, $mensaje))
- 		echo "Fallo el envio de correo";
+	
+	$headers = "From: apps@eneasp.com" . "\r\n";
+	$headers .= 'MIME-Version: 1.0' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	
+	// Enviarlo
+	
+	if (mail($para, $titulo, $mensaje, $headers))
+		$mensajeValida = "Mail ok";
+		else
+			$mensajeValida =  "Fallo el envio de correo";
+	
 }
 
 ?>
@@ -111,7 +120,9 @@ function envioMail($email,$idSolicitud){
 	<body> 
 <?php 
 	include_once($pathCabecera);
+	echo $mensajeValida;
 ?>
+
 		<form name="altaSolicitud" action="../../index.php" method="post"  id="altaSolicitud">
 		 <h1>Peticion de Reprograf&iacute;a</h1>
 		  <div class="inset" style="text-align:center;">

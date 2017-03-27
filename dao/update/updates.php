@@ -15,5 +15,7 @@ $sentenciaUpdateGastosImpresoraByN = "UPDATE gastos_impresora set byn_unidades =
 $sentenciaUpdateGastosImpresoraColor = "UPDATE gastos_impresora set color_unidades = ?, color_precio = ?, color_total = ? where departamento_id=? and  YEAR(periodo) = ? and MONTH(periodo) = ?";
 $sentenciaUpdateGastosMaquinaByN = "UPDATE gastos_maquina set byn_unidades = ?,  byn_precio = ?, byn_total = ? where departamento_id=? and YEAR(periodo) = ? and MONTH(periodo) = ?";
 $sentenciaUpdateGastosMaquinaColor = "UPDATE gastos_maquina set color_unidades = ?, color_precio = ?, color_total = ? where departamento_id=? and YEAR(periodo) = ? and MONTH(periodo) = ?";
-
+$sentenciaUpdateDepartamentoSolicitud = "UPDATE solicitud set departamento_id = ?, subdepartamento_id = ? where solicitud_id = ?";
+$sentenciaUpdateSubdepartamentoSolicitud = "UPDATE solicitud set subdepartamento_id = ? where solicitud_id = ?";
+$sentenciaUpdateStatusDosSolicitud = "UPDATE solicitud set status_id = ?, fecha_validacion = now() where solicitud_id = ?";
 ?>

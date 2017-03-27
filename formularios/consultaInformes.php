@@ -245,6 +245,8 @@ if (!empty($_POST["subdepartamento"])){
 								<th>CODIGO</th>
 								<th>DEPARTAMENTO</th>
 								<?php if ($tipoInforme == 'detalle') { ?>
+								<th>DEPARTAMENTO</th>
+								<th>SUBDEPARTAMENTO</th>
 								<th>FECHA DE CIERRE</th>
 								<?php } ?>
 								<?php if ($tipoInforme != 'detalle') { ?>
@@ -289,7 +291,7 @@ if (!empty($_POST["subdepartamento"])){
 									?>
 									<tbody>
 									<tr>
-										<td><?php echo $fila['codigo'];?></td>
+										<td><?php echo $fila['id'];?></td>
 										<td><?php echo $fila['CeCo'];?></td>
 										<td><?php echo $fila['departamentos_desc'];?></td>
 										<td><?php echo $fila['subdepartamentos_desc'];?></td>

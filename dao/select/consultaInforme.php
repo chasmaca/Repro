@@ -103,6 +103,7 @@ function recuperaInformesMesAdmin($mysqlCon, $anio, $dpto,$subdpto){
 
 	$informeResult = mysqli_query($mysqlCon,$generaInformeMes);
 
+
 	if (!$informeResult) {
 		echo "No se pudo ejecutar con exito la consulta ($generaInformeMes) en la BD: " . mysql_error();
 		exit;
@@ -363,9 +364,101 @@ function recuperaDetalleMesValidador($mysqlCon,$usuario,$anio,$dpto,$subdpto){
 
 	$recuperaInformeDetalleValida .= " and month(s1.fecha_validacion) = " . $anioPartido[0] . 
 		" and year(s1.fecha_validacion) = " . $anioPartido[1];
+	
 
-	echo $recuperaInformeDetalleValida;
-	exit;
+	
+	if ($dpto == "aa"){
+	
+		$dpto4Usuario = cargarDptoSessionAsArray($usuario);
+	
+	
+	$recuperaInformeDetalleValida .= " UNION
+	SELECT
+	'MAQUINA' AS esb,
+	'MAQUINA' AS codigo,
+	'MAQUINA' AS departamento,
+	'MAQUINA' AS subdepartamento,
+	'' AS fecha,
+	'0' AS encuadernacion,
+	'0' AS byn,
+	'0' AS color,
+	'0' AS varios,
+	'' AS nombre,
+	'' AS apellidos,
+	'' AS descripcion,
+	ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+	ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+	'0' AS BYN_IMPRESORA,
+	'0'  AS COLOR_IMPRESORA
+	FROM gastos_maquina WHERE departamento_ID IN (".$dpto4Usuario."
+			) AND MONTH(PERIODO) = " . $anioPartido[0] . " AND YEAR(PERIODO) = " . $anioPartido[1] . "
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (".$dpto4Usuario.") AND MONTH(PERIODO) = " . $anioPartido[0] . " AND YEAR(PERIODO) = " . $anioPartido[1];
+	}else{
+		if ($dpto != 0){
+		
+			
+			$recuperaInformeDetalleValida .= " UNION
+	SELECT
+	'MAQUINA' AS esb,
+	'MAQUINA' AS codigo,
+	'MAQUINA' AS departamento,
+	'MAQUINA' AS subdepartamento,
+	'' AS fecha,
+	'0' AS encuadernacion,
+	'0' AS byn,
+	'0' AS color,
+	'0' AS varios,
+	'' AS nombre,
+	'' AS apellidos,
+	'' AS descripcion,
+	ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+	ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+	'0' AS BYN_IMPRESORA,
+	'0'  AS COLOR_IMPRESORA
+	FROM gastos_maquina WHERE departamento_ID IN (".$dpto."
+			) AND MONTH(PERIODO) = " . $anioPartido[0] . " AND YEAR(PERIODO) = " . $anioPartido[1] . "
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (".$dpto.") AND MONTH(PERIODO) = " . $anioPartido[0] . " AND YEAR(PERIODO) = " . $anioPartido[1];
+				
+			
+		}
+	}
+	
 	$informeResult = mysqli_query($mysqlCon,$recuperaInformeDetalleValida);
 
 	if (!$informeResult) {
@@ -380,77 +473,4 @@ function recuperaDetalleMesValidador($mysqlCon,$usuario,$anio,$dpto,$subdpto){
 
 }
 
-
-function recuperaGlobalValidador($usuario){
-
-	global $mysqlCon, $recuperaInformeGlobalValida;
-
-	$recuperaInformeGlobalValida = $recuperaInformeGlobalValida . $usuario . ") group by de1.ceco";
-
-	$informeResult = mysqli_query($mysqlCon,$recuperaInformeGlobalValida);
-
-	if (!$informeResult) {
-		echo "No se pudo ejecutar con exito la consulta ($recuperaInformeGlobalValida) en la BD: " . mysql_error();
-		exit;
-	}
-
-	return $informeResult;
-
-}
-
-
-function recuperaGlobalMesValidador($usuario,$anio,$dpto,$subdpto){
-
-	global $mysqlCon, $recuperaInformeGlobalValida;
-	
-	$anioPartido = explode("/",$anio);
-	
-	$recuperaInformeGlobalValida = $recuperaInformeGlobalValida . $usuario . ")";
-	
-	
-	if ($dpto == "aa"){
-	
-		$dpto4Usuario = cargarDptoSessionAsArray($usuario);
-		
-		$recuperaInformeGlobalValida = $recuperaInformeGlobalValida . " and s1.departamento_id in (" . $dpto4Usuario . ") ";
-	
-	}else{
-	
-		if ($dpto!=0){
-			
-			$recuperaInformeGlobalValida = $recuperaInformeGlobalValida . " and s1.departamento_id = " . $dpto;
-		
-			if ($subdpto == "aa"){
-			
-				$subdpto4Usuario = cargarSubDptoXDptoAsArray($usuario, $dpto);
-				
-				$recuperaInformeGlobalValida = $recuperaInformeGlobalValida . " and s1.subdepartamento_id in (" . $subdpto4Usuario . ") ";
-			
-			}else{
-				if ($subdpto != 0){
-						
-					$recuperaInformeGlobalValida = $recuperaInformeGlobalValida . " and s1.subdepartamento_id = " . $subdpto;
-			
-				}
-			}
-			
-		}
-		
-	}
-
-	
-
-	$recuperaInformeGlobalValida = $recuperaInformeGlobalValida . " and month(s1.fecha_validacion) = " . $anioPartido[0] .
-	" and year(s1.fecha_validacion) = " . $anioPartido[1] . " group by de1.ceco";
-
-	
-	$informeResult = mysqli_query($mysqlCon,$recuperaInformeGlobalValida);
-	
-	if (!$informeResult) {
-		echo "No se pudo ejecutar con exito la consulta ($recuperaInformeGlobalValida) en la BD: " . mysql_error();
-		exit;
-	}
-	
-	return $informeResult;
-}
 ?>

@@ -90,7 +90,6 @@ include_once($pathPeriodo);
 							<th>COLOR</th>
 							<th>ENCUADERNACIONES</th>
 							<th>VARIOS</th>
-
 							<th>GASTOS IMPRESORA</th>
 							<th>GASTOS MAQUINAS</th>
 							<th>TOTAL</th>
