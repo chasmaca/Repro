@@ -12,9 +12,8 @@ $pathAnalitica = "../utiles/analyticstracking.php";
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/estilos.css">
 <link rel="stylesheet" href="../css/styles.css">
-<script src="../js/altaDepartamento.js" type="text/javascript" ></script>
-<link rel="stylesheet" href="../css/styles.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="../js/altaDepartamento.js" type="text/javascript" ></script>
 <script type="text/javascript">
     $(function() {
       if ($.browser.msie && $.browser.version.substr(0,1)<7)
@@ -46,7 +45,7 @@ $pathAnalitica = "../utiles/analyticstracking.php";
         			<span>CeCo:</span>
         			<input type="text" id="CeCo" name="CeCo" value=""/> 
         			<br/><br/>
-        			<input type="button" name="guardaDepartamento" id="guardaDepartamento" value="Alta Departamento" onclick="javascript:validaFormulario();"/>
+        			<input type="button" name="guardaDepartamento" id="guardaDepartamento" value="Alta Departamento"/>
         		</div>
         	</form>
         </div>

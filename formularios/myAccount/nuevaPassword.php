@@ -34,18 +34,19 @@ function envioMail($email){
 	$mensaje .= '</div>';
 	$mensaje .= '</header>';
 	$mensaje .= '<br><br>';
-	$mensaje .= '<p>Buenos días:</p>';
-	$mensaje .= '<p>Se ha recibido una nueva solicitud de cambio de contraseña.</p>';
-	$mensaje .= '<p>Si usted ha realizado la peticion, pulse <a href="http://www.eneasp.com/Repro/formularios/myAccount/crearPassword.php">AQUI</a>.</p>';
+	$mensaje .= '<p>Buenos d&iacute;as:</p>';
+	$mensaje .= '<p>Se ha recibido una nueva solicitud de cambio de contrase&ntilde;a.</p>';
+	$mensaje .= '<p>Si usted ha realizado la petici&oacute;n, pulse <a href="http://www.eneasp.com/Repro/formularios/myAccount/crearPassword.php">AQU&Iacute;</a>.</p>';
 	$mensaje .= '<p>Por favor, de no haber realizado la petición, ignore este correo.</p>';
 	$mensaje .= '<p>Gracias.</p>';
+	$mensaje .= '<p>Por favor, no responda a este mensaje, esta direcci&oacute;n de e-mail s&oacute;lo se utiliza para realizar env&iacute;os.</p>';
 	$mensaje .= '</div>';
 	$mensaje .= '</body>';
 	$mensaje .= '</html>';
 
 	$headers = "From: apps@eneasp.com" . "\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
 	// Enviarlo
 	if (mail($para, $titulo, $mensaje, $headers))

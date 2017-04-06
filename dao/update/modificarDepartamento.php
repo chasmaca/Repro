@@ -6,7 +6,7 @@ $pathUpdate = "updates.php";
 include_once($pathDB);
 include_once($pathUpdate);
 
-$departamentoDesc = utf8_decode(htmlspecialchars($_POST["nombreDepartamento"]));
+$departamentoDesc = utf8_encode(htmlspecialchars($_POST["nombreDepartamento"]));
 $departamentoId = htmlspecialchars($_POST["idDepartamento"]);
 $ceco = htmlspecialchars($_POST["CeCo"]);
 

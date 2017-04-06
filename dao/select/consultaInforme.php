@@ -18,7 +18,7 @@ function recuperaInformes($mysqlCon){
 	return $informeResult;
 }
 
-function recuperaInformesMesAdmin($mysqlCon, $anio, $dpto,$subdpto){
+function recuperaInformesMesAdminConsulta($mysqlCon, $anio, $dpto,$subdpto){
 
 	global $generaInformeMes;
 
@@ -100,7 +100,8 @@ function recuperaInformesMesAdmin($mysqlCon, $anio, $dpto,$subdpto){
 		from gastos_maquina i where i.departamento_id = " . $dpto ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
 		
 	}
-
+//	$generaInformeMes .= " order by codigo";
+			
 	$informeResult = mysqli_query($mysqlCon,$generaInformeMes);
 
 
@@ -201,7 +202,7 @@ function recuperaInformesGlobal($mysqlCon){
 	return $informeGlobalResult;
 }
 
-function recuperaInformesGlobalMesAdmin($mysqlCon,$anio, $dpto, $subdpto){
+function recuperaInformesGlobalMesAdminListado($mysqlCon,$anio, $dpto, $subdpto){
 
 	global $generaInformeGlobalMes, $generaInformeGlobalMesAdmin, $arrayData;
 	$arrayData = array();

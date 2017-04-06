@@ -36,12 +36,12 @@ function recuperamosSolicitudesPorUsuario(){
 			$tmp["solicitud_id"] = $solicitud_id;
 			$tmp["departamento_id"] = $departamento_id;
 			$tmp["subdepartamento_id"] = $subdepartamento_id;
-			$tmp["nombre_solicitante"] = $nombre_solicitante;
-			$tmp["apellidos_solicitante"] = $apellidos_solicitante;
+			$tmp["nombre_solicitante"] = utf8_encode($nombre_solicitante);
+			$tmp["apellidos_solicitante"] = utf8_encode($apellidos_solicitante);
 			$tmp["autorizador_id"] = $autorizador_id;
-			$tmp["descripcion_solicitante"] = $descripcion_solicitante;
-			$tmp["email_solicitante"] = $email_solicitante;
-			$tmp["status_id"] = $status_id;
+			$tmp["descripcion_solicitante"] = utf8_encode($descripcion_solicitante);
+			$tmp["email_solicitante"] = utf8_encode($email_solicitante);
+			$tmp["status_id"] = utf8_encode($status_id);
 			$tmp["fecha_alta"] = $fecha_alta;
 			$tmp["fecha_validacion"] = $fecha_validacion;
 			$tmp["fecha_cierre"] = $fecha_cierre;

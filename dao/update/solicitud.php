@@ -77,20 +77,21 @@ function envioMail($email,$idSolicitud,$comentario){
 	$mensaje .= '</div>';
 	$mensaje .= '</header>';
 	$mensaje .= '<br><br>';
-	$mensaje .= '<p>Buenos días:</p>';
+	$mensaje .= '<p>Buenos d&iatue;as:</p>';
 	if ($accion == 1){
-		$mensaje .= "<p>Su solicitud ha sido autorizada, con el siguiente número de parte le podrán realizar sus encargos en Reprografía.<p>";
+		$mensaje .= "<p>Su solicitud ha sido autorizada, con el siguiente n&uacute;mero de parte le podr&aacute;n realizar sus encargos en Reprograf&iacute;a.<p>";
 		$mensaje .= "<p><h3><b>". $idSolicitud ."</b></h3></p>";
 		$mensaje .= "<p>Muchas Gracias.</p>";
 	}
 	if ($accion == 2){
-		$mensaje .= "<p>Su solicitud ha sido rechazada por su autorizador con la siguiente razón.</p>";
+		$mensaje .= "<p>Su solicitud ha sido rechazada por su autorizador con la siguiente raz&oacute;n.</p>";
 		$mensaje .= "<p>" . $comentario . "</p>";
-		$mensaje .= "<p>Póngase en contacto con su autorizador para conocer mas detalles.</p>";
+		$mensaje .= "<p>P&oacute;ngase en contacto con su autorizador para conocer mas detalles.</p>";
 		$mensaje .= "<p>Muchas Gracias.</p>";
 	}
 	$mensaje .= '<br/>';
-	$mensaje .= '<p>Si desea acceder a la aplicación pulse <a href="http://www.eneasp.com/Repro">aqui</a>.';
+	$mensaje .= '<p>Si desea acceder a la aplicaci&oacute;n pulse <a href="http://www.eneasp.com/Repro">aqui</a>.';
+	$mensaje .= '<p>Por favor, no responda a este mensaje, esta direcci&oacute;n de e-mail s&oacute;lo se utiliza para realizar env&iacute;os.</p>';
 	$mensaje .= '</div>';
 	$mensaje .= '</body>';
 	$mensaje .= '</html>';
@@ -98,7 +99,7 @@ function envioMail($email,$idSolicitud,$comentario){
 	
 	$headers = "From: apps@eneasp.com" . "\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
 	// Enviarlo
 	$mensajeValida = "";

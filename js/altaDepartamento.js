@@ -1,21 +1,45 @@
+$(document).ready(function(){
+
+	$( "#guardaDepartamento" ).click(function() {
+
+		if (validaFormulario()){
+			$.ajax({
+				type:     "get",
+		        data: 
+		        { 
+		        	departamento: $("#nombreDepartamento").val(),
+	        		ceco: $("#CeCo").val()
+	        	},
+		        url: "../dao/insert/insertDepartamentoJSON.php",
+			    success: function (data) {
+		        	alert ("Se ha realizado el alta del departamento");
+		        	location.href="../formularios/altaDepartamento.php";
+		        },
+        		error: function(xhr, status, error) {
+        			  var err = eval("(" + xhr.responseText + ")");
+        			  alert(err.Message);
+        			}
+			});
+		}
+	});
+	
+});
+
 function validaFormulario(){
 
-	var ok = 0;
+	var ok = true;
 
 	if (document.getElementById('nombreDepartamento').value == ""){
 		alert ("Debe rellenar el departamento");
-		ok = 1;
+		ok = false;
 	}
 
 	if (document.getElementById('CeCo').value == ""){
 		alert ("Debe rellenar el CeCo");
-		ok = 1;
+		ok = false;
 	}
 	
-	if (ok == 0){
-		document.forms[0].submit();
-	}
-		//
+	return ok		//
 }
 
 

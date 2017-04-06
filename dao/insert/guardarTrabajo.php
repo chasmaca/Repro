@@ -42,6 +42,23 @@ $totalEncuadernacion = $subtotalEspiral + $subtotalEncolado;
 $existeTrabajoPorSol = $existeTrabajoQuery . $solicitud;
 $filaTrabajo = operacionARealizar($mysqlCon,$existeTrabajoPorSol);
 
+//Write action to txt log
+$log  = "User: ".$_SERVER['REMOTE_ADDR'].' - '.date("F j, Y, g:i a").PHP_EOL.
+"Solicitud: ".$solicitud.PHP_EOL.
+"ImporteVarios1: ".$subtotalVarios1.PHP_EOL.
+"ImporteVarios2: ".$subtotalVarios2.PHP_EOL.
+"ImporteByN: ".$subtotalByN.PHP_EOL.
+"ImporteColor: ".$subtotalColor.PHP_EOL.
+"ImporteEncuadernacion: ".$subtotalEspiral.PHP_EOL.
+"ImporteEncolado: ".$subtotalEncolado.PHP_EOL.
+
+"-------------------------".PHP_EOL;
+//-
+//file_put_contents('./log_'.date("j.n.Y").'.txt', $log, FILE_APPEND);
+
+error_log($log, 3, "../../log/importes.log");
+
+
 if ($filaTrabajo == 0) {
 
 	insertaTrabajo($mysqlCon,$sentenciaInsertTrabajo,$sentenciaInsertDetalle,$orden,$codigo,$esb);
@@ -499,6 +516,8 @@ function recuperaDetalleColor($mysqlCon){
 		exit;
 
 	}
+	
+	echo $recuperaColorQuery;
 
 	return $colorResult;
 
@@ -660,13 +679,13 @@ function insertaExtra($tablaValores7,$conexion){
 	$observaciones = "";
 	$fechaCierre = "";
 
-	for($i = 0, $c = count($valores1); $i < $c; $i++){
-
+	for($i = 0; $i < count($valores1); $i++){
+		$detalle = 0;
 		if ($valores1[$i] !== ""){
-
 			$valores11 = explode("#", $valores1[$i]);
 			$tipo = substr($valores11[0], 0, strpos($valores11[0], "-"));
 			$detalle = recuperaMaximoPorTipo($conexion, 7);
+				
 			$descripcion = $valores11[1];
 			$precio = $valores11[3];
 			$unidades = $valores11[2];
@@ -674,21 +693,20 @@ function insertaExtra($tablaValores7,$conexion){
 
 			$stmt = $conexion->prepare($sentenciaInsertaExtra);
 			$stmt->bind_param('iisd',$detalle,$tipo,$descripcion,$precio);
-			if (!$stmt->execute()) {
-				echo "Falló la ejecución: (" . $stmt->errno . ") " . $stmt->error;
-			}
-
-			$stmt->close();
+			
+			$stmt->execute();
+			
 			$fechaCierre = null;
- 			$stmt1 = $conexion->prepare($sentenciaInsertDetalle);
- 			$stmt1->bind_param('iiiissid',$trabajo,$tipo,$detalle,$unidades,$observaciones,$fechaCierre,$solicitud,$precioTotal);
- 			if (!$stmt1->execute()) {
- 				echo "Falló la ejecución: (" . $stmt1->errno . ") " . $stmt1->error;
- 			}
- 
- 			$stmt1->close();
- 
+			$stmt1 = $conexion->prepare($sentenciaInsertDetalle);
+			
+			$stmt1->bind_param('iiiissid',$trabajo,$tipo,$detalle,$unidades,$observaciones,$fechaCierre,$solicitud,$precioTotal);
+			$stmt1->execute();
+				
+			
 		}
 	}
+	$stmt->close();
+	$stmt1->close();
+	
 }
 ?>

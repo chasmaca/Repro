@@ -1,3 +1,8 @@
+$(document).ready(function(){
+	
+});
+
+
 function envioSolicitud(){
 	var envio = 0;
 	var emailcheck = 0;

@@ -109,7 +109,7 @@ include_once($pathMenu);
 				        }
 ?>
 				        >
-				<?php echo $fila["DEPARTAMENTOS_DESC"]; ?>
+				<?php echo utf8_encode($fila["DEPARTAMENTOS_DESC"]); ?>
 				</option>
 <?php 
 				}
@@ -133,7 +133,7 @@ include_once($pathMenu);
 <?php 
                                 }
 ?>
-							> <?php echo $cadenaValor[$row][2];?></option>
+							> <?php echo utf8_encode($cadenaValor[$row][2]);?></option>
 <?php
                         }
                     }

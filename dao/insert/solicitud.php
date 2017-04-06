@@ -87,6 +87,7 @@ function envioMail($email,$idSolicitud){
 	$mensaje .= '<p>Se ha recibido una nueva solicitud de reprograf&iacute;a.</p>';
 	$mensaje .= '<p>Por favor, acceda a la aplicaci&oacute;n para su gesti&oacute;n lo antes posible, pulsando <a href="http://www.eneasp.com/Repro">AQUI</a>.</p>';
 	$mensaje .= '<p>Gracias.</p>';
+	$mensaje .= '<p>Por favor, no responda a este mensaje, esta direcci&oacute;n de e-mail s&oacute;lo se utiliza para realizar env&iacute;os.</p>';
 	$mensaje .= '</div>';
 	$mensaje .= '<br/><br/>';
 	$mensaje .= '</body>';
@@ -95,7 +96,7 @@ function envioMail($email,$idSolicitud){
 	
 	$headers = "From: apps@eneasp.com" . "\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 	
 	// Enviarlo
 	

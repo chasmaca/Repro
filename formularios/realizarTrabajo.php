@@ -29,6 +29,12 @@ $usuarioPlantilla = $_SESSION["nombre_session"];
 	<head>
 		<script type="text/javascript" src="../js/detalleTrabajo.js"></script>
 		<link rel="stylesheet" type="text/css" href="/Repro/css/estilosTrabajo.css"> </link>
+		<script type="text/javascript">
+function mostramosImporte(){
+	var importe = document.getElementById('total').value;
+	alert("se va a guardar/cerrar el trabajo por un importe de " + importe + " Euros. \n Por favor, comprueba que la cantidad es la correcta.\n De no ser asi, anota el numero de trabajo, numero de copias y cantidades correctas.");
+}
+		</script>
 	</head>
 	<body onload="javascript:calculaTotal();"> 
 <?php 
@@ -38,12 +44,12 @@ actualizaEstadoUsuario($_GET['solicitudId'], $mysqlCon, 4, $usuarioPlantilla);
 $departamentoSol = recuperaDepartamento($_GET['solicitudId'],$mysqlCon);
 
 $solicitanteSol = recuperaSolicitante($_GET['solicitudId'],$mysqlCon);
-$recuperaDetalleEspiral = recuperaDetalleEspiral($mysqlCon);
-$recuperaDetalleEncolado = recuperaDetalleEncolado($mysqlCon);
-$recuperaDetalleVarios1 = recuperaDetalleVarios1($mysqlCon);
-$recuperaDetalleColor = recuperaDetalleColor($mysqlCon);
-$recuperaDetalleVarios2 = recuperaDetalleVarios2($mysqlCon);
-$recuperaDetalleByN = recuperaDetalleByN($mysqlCon);
+$recuperaDetalleEspiral = recuperaDetalleEspiralConsulta($mysqlCon);
+$recuperaDetalleEncolado = recuperaDetalleEncoladoConsulta($mysqlCon);
+$recuperaDetalleVarios1 = recuperaDetalleVarios1Consulta($mysqlCon);
+$recuperaDetalleColor = recuperaDetalleColorConsulta($mysqlCon);
+$recuperaDetalleVarios2 = recuperaDetalleVarios2Consulta($mysqlCon);
+$recuperaDetalleByN = recuperaDetalleByNConsulta($mysqlCon);
 
 $departamentoNombre = "";
 $departamentoTreinta ="";
@@ -78,16 +84,16 @@ if( isset($_GET['error']) ){
 			<h1>Realizar Trabajo</h1>
 			<div style="display: inline; padding:10px;">
 				<label for="email">Departamento:</label>
-				<?php echo $departamentoNombre; ?>
+				<?php echo utf8_encode($departamentoNombre); ?>
 			</div>
 			<div style="display: inline; padding:10px;">
 				<label for="email">Subdepartamento:</label>
-				<?php echo $subdepartamentoNombre; ?>
+				<?php echo utf8_encode($subdepartamentoNombre); ?>
 			</div>
 			<div style="display: inline; padding:10px;">
 				<label for="email">Fecha:</label>
 				<?php date_default_timezone_set("Europe/Madrid");
-				echo iconv('ISO-8859-1', 'UTF-8', strftime('%A %d de %B de %Y', time())); ?>
+				echo iconv('UTF-8', 'UTF-8', strftime('%A %d de %B de %Y', time())); ?>
 			</div>
 			<div style="display: inline; padding:10px;">
 				<label for="email">Proyecto/Orden:</label>
@@ -102,7 +108,7 @@ if( isset($_GET['error']) ){
 			</div>
 			<div style="display: block; padding:10px;">
 				<label for="email">Solicitante:</label>
-				<?php echo $solicitanteSol; ?>
+				<?php echo utf8_encode($solicitanteSol); ?>
 				<input type="hidden" name="esb" id="esb" value="<?php echo $departamentoTreinta ?>"/>
 			</div>
 <?php 
@@ -534,8 +540,8 @@ if( isset($_GET['error']) ){
 			<input type="hidden" name="cerrar" id="cerrar" value="0"/> 
 			<input type="hidden" name="departamento" id="departamento" value='<?php echo $departamentoId; ?>' />
 			<input type="hidden" name="cerramosTrabajo" id="cerramosTrabajo" value="0"/> 
-			<input type="button" name="guardar" value="Guardar" onclick="javascript:guardarTrabajo();"/>
-			<input type="button" name="Cerrar" value="Cerrar" onclick="javascript:closeWork();"/>
+			<input type="button" name="guardar" value="Guardar" onclick="javascript:mostramosImporte();javascript:guardarTrabajo();"/>
+			<input type="button" name="Cerrar" value="Cerrar" onclick="javascript:mostramosImporte();javascript:closeWork();"/>
 			<input type="button" name="Volver" value="Volver"  onclick="javascript:volverHome();"/>
 
 		</form>

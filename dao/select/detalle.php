@@ -6,24 +6,21 @@ function recuperaMaximoPorTipo($mysqlCon,$tipo){
 	global $recuperaMaxDetalle;
 	
 	$valor = 1;
-	$recuperaMaxDetalle .= $tipo;
-
-	$detalleMax = mysqli_query($mysqlCon,$recuperaMaxDetalle);
 	
-	if (!$detalleMax) {
-		echo "No se pudo ejecutar con exito la consulta ($recuperaMaxDetalle) en la BD: " . mysql_error();
-		exit;
+	$stmt = $mysqlCon->prepare($recuperaMaxDetalle);
+	$stmt->bind_param('i',$tipo);
+	/*Ejecucion de la consulta*/
+	$stmt->execute();
+		
+	/*Almacenamos el resultSet*/
+	$stmt->bind_result($DETALLEID);
+	
+	while($stmt->fetch()) {
+		$valor = $DETALLEID;
 	}
 	
-	if (mysqli_num_rows($detalleMax) > 0) {
-		while ($fila = mysqli_fetch_assoc($detalleMax)) {
-			if ($fila['DETALLEID'] == null)
-				$valor = 1;
-			else
-				$valor = $fila['DETALLEID'];
-		}
-	}
-	
+	if ($valor == null)
+		$valor = 1;
 	
 	return $valor;
 }

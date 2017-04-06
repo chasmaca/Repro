@@ -2,10 +2,8 @@
 $path  = "../utiles/connectDBUtiles.php";
 include_once($path);
 
-
 $pathQuery = "query.php";
 include_once($pathQuery);
-
 
 if (empty($_GET["solicitudId"])) {
 	global $solicitud;
@@ -13,6 +11,7 @@ if (empty($_GET["solicitudId"])) {
 	$solicitud = $_GET["solicitudId"];
 }
 
+global $existeTrabajoQuery,$mysqlCon;
 $existeTrabajoPorSol = $existeTrabajoQuery . $solicitud;
 $filaTrabajo = operacionARealizar($mysqlCon,$existeTrabajoPorSol);
 $existeTrabajo = 0;
@@ -73,15 +72,13 @@ function recuperaSolicitante($solicitud, $mysqlCon){
 /**
  * Recuperamos el detalle de Espiral recuperaTiposDetalleEspiralNew
  */
-function recuperaDetalleEspiral($mysqlCon){
+function recuperaDetalleEspiralConsulta($mysqlCon){
 	
 	global $recuperaEspiralQuery,$recuperaEspiralDetalleQuery,$existeTrabajo,$solicitud;
 	
 	if ($existeTrabajo == 0){
-		
 		$espiralResult = mysqli_query($mysqlCon,$recuperaEspiralQuery);
 	}else{
-		
 		$recuperaEspiralDetalleQuery = $recuperaEspiralDetalleQuery . $solicitud;
 		$espiralResult = mysqli_query($mysqlCon,$recuperaEspiralDetalleQuery);
 	}
@@ -89,7 +86,6 @@ function recuperaDetalleEspiral($mysqlCon){
 		echo "No se pudo ejecutar con exito la consulta ($recuperaEspiralQuery) en la BD: " . mysql_error();
 		exit;
 	}
-	
 	return $espiralResult;
 }
 
@@ -97,7 +93,7 @@ function recuperaDetalleEspiral($mysqlCon){
 /**
  * Recuperamos el detalle de Espiral recuperaTiposDetalleEspiralNew
  */
-function recuperaDetalleEncolado($mysqlCon){
+function recuperaDetalleEncoladoConsulta($mysqlCon){
 
 	global $recuperaEncoladoQuery,$recuperaEncoladoDetalleQuery,$existeTrabajo, $solicitud;
 	
@@ -107,19 +103,17 @@ function recuperaDetalleEncolado($mysqlCon){
 		$recuperaEncoladoDetalleQuery = $recuperaEncoladoDetalleQuery . $solicitud;
 		$encoladoResult = mysqli_query($mysqlCon,$recuperaEncoladoDetalleQuery);
 	}
-	
 	if (!$encoladoResult) {
 		echo "No se pudo ejecutar con exito la consulta ($recuperaEncoladoQuery) en la BD: " . mysql_error();
 		exit;
 	}
-	
 	return $encoladoResult;
 }
 
 /**
  * Recuperamos el detalle de Espiral recuperaTiposDetalleEspiralNew
  */
-function recuperaDetalleVarios1($mysqlCon){
+function recuperaDetalleVarios1Consulta($mysqlCon){
 	
 	global $recuperaVariosUnoQuery,$recuperaVariosUnoDetalleQuery,$existeTrabajo, $solicitud;
 	
@@ -129,25 +123,23 @@ function recuperaDetalleVarios1($mysqlCon){
 		$recuperaVariosUnoDetalleQuery = $recuperaVariosUnoDetalleQuery . $solicitud;
 		$variosUnoResult = mysqli_query($mysqlCon,$recuperaVariosUnoDetalleQuery);
 	}
-	
 	if (!$variosUnoResult) {
 		echo "No se pudo ejecutar con exito la consulta ($recuperaVariosUnoQuery) en la BD: " . mysql_error();
 		exit;
 	}
-
 	return $variosUnoResult;
 }
 
 /**
  * Recuperamos el detalle de Espiral recuperaTiposDetalleEspiralNew
  */
-function recuperaDetalleColor($mysqlCon){
+function recuperaDetalleColorConsulta($mysqlCon){
 	
-	global $recuperaColorQuery,$recuperaColorDetalleQuery,$existeTrabajo, $solicitud;
+	global $recuperaColorQuery,$recuperaColorDetalleQuery,$existeTrabajo, $solicitud,$colorResult;
 	
-	if ($existeTrabajo == 0)
+	if ($existeTrabajo == 0){
 		$colorResult = mysqli_query($mysqlCon,$recuperaColorQuery);
-	else{
+	}else{
 		$recuperaColorDetalleQuery = $recuperaColorDetalleQuery . $solicitud;
 		$colorResult = mysqli_query($mysqlCon,$recuperaColorDetalleQuery);
 	}
@@ -155,14 +147,13 @@ function recuperaDetalleColor($mysqlCon){
 		echo "No se pudo ejecutar con exito la consulta ($recuperaColorQuery) en la BD: " . mysql_error();
 		exit;
 	}
-
 	return $colorResult;
 }
 
 /**
  * Recuperamos el detalle de Espiral recuperaTiposDetalleEspiralNew
  */
-function recuperaDetalleByN($mysqlCon){
+function recuperaDetalleByNConsulta($mysqlCon){
 	
 	global $recuperaByNQuery,$recuperaByNDetalleQuery,$existeTrabajo, $solicitud;
 	
@@ -172,31 +163,26 @@ function recuperaDetalleByN($mysqlCon){
 		$recuperaByNDetalleQuery = $recuperaByNDetalleQuery . $solicitud;
 		$byNResult = mysqli_query($mysqlCon,$recuperaByNDetalleQuery);
 	}
-		
-
 	if (!$byNResult) {
 		echo "No se pudo ejecutar con exito la consulta ($recuperaByNQuery) en la BD: " . mysql_error();
 		exit;
 	}
-
 	return $byNResult;
 }
 
 /**
  * Recuperamos el detalle de Espiral recuperaTiposDetalleEspiralNew
  */
-function recuperaDetalleVarios2($mysqlCon){
+function recuperaDetalleVarios2Consulta($mysqlCon){
 	
 	global $recuperaDetalleVarios2,$existeTrabajo, $solicitud;
 	
 	$recuperaVariosDosDetalleQuery = $recuperaDetalleVarios2 . $solicitud;
 	$variosDosResult = mysqli_query($mysqlCon,$recuperaVariosDosDetalleQuery);
-
 	if (!$variosDosResult) {
 		echo "No se pudo ejecutar con exito la consulta ($recuperaDetalleVarios2) en la BD con el parametro $solicitud: " . mysql_error();
 		exit;
 	}
-
 	return $variosDosResult;
 }
 
@@ -206,11 +192,10 @@ function recuperaDetalleVarios2($mysqlCon){
 
 function recuperaSubtotalEspiral($mysqlCon){
 	
-	global $solicitud,$recuperaSubtotalEspiral;
+	global $solicitud,$recuperaSubtotalEspiral,$precioEspiral;
 	
 	$trabajo = 1;
 	$espiralReturn = 0;
-	
 	/*Prepare Statement*/
 	if ($stmt = $mysqlCon->prepare($recuperaSubtotalEspiral)) {
 		/*Asociacion de parametros*/
@@ -229,16 +214,14 @@ function recuperaSubtotalEspiral($mysqlCon){
 		echo "NO SE EJECUTA";
 	}
 	return $espiralReturn;
-	
 }
 
 function recuperaSubtotalEncolado($mysqlCon){
 
-	global $solicitud,$recuperaSubtotalEncolado;
+	global $solicitud,$recuperaSubtotalEncolado,$col1;
 	
 	$trabajo = 1;
 	$precioEncolado = 0;
-	
 	/*Prepare Statement*/
 	if ($stmt = $mysqlCon->prepare($recuperaSubtotalEncolado)) {
 		/*Asociacion de parametros*/
@@ -257,16 +240,14 @@ function recuperaSubtotalEncolado($mysqlCon){
 		echo "NO SE EJECUTA";
 	}
 	return $precioEncolado;
-	
 }
 
 function recuperaSubtotalVarios1($mysqlCon){
 
-	global $solicitud,$recuperaSubtotalVarios1;
+	global $solicitud,$recuperaSubtotalVarios1,$col1;
 	
 	$trabajo = 1;
 	$precioVarios1 = 0;
-	
 	/*Prepare Statement*/
 	if ($stmt = $mysqlCon->prepare($recuperaSubtotalVarios1)) {
 		/*Asociacion de parametros*/
@@ -285,16 +266,13 @@ function recuperaSubtotalVarios1($mysqlCon){
 		echo "NO SE EJECUTA";
 	}
 	return $precioVarios1;
-	
 }
 
 function recuperaSubtotalVarios2($mysqlCon){
 
-	global $solicitud,$recuperaSubtotalVarios2;
-
+	global $solicitud,$recuperaSubtotalVarios2,$col1;
 	$trabajo = 1;
 	$precioVarios2 = 0;
-	
 	/*Prepare Statement*/
 	if ($stmt = $mysqlCon->prepare($recuperaSubtotalVarios2)) {
 		/*Asociacion de parametros*/
@@ -313,13 +291,11 @@ function recuperaSubtotalVarios2($mysqlCon){
 		echo "NO SE EJECUTA";
 	}
 	return $precioVarios2;
-	
 }
 
 function recuperaSubtotalColor($mysqlCon){
 
-	global $solicitud,$recuperaSubtotalColor;
-
+	global $solicitud,$recuperaSubtotalColor,$col1;
 	$trabajo = 1;
 	$precioColor = 0;
 	
@@ -341,17 +317,13 @@ function recuperaSubtotalColor($mysqlCon){
 		echo "NO SE EJECUTA";
 	}
 	return $precioColor;
-	
-	
 }
 
 function recuperaSubtotalByN($mysqlCon){
 
-	global $solicitud,$recuperaSubtotalByN;
-
+	global $solicitud,$recuperaSubtotalByN,$col1;
 	$trabajo = 1;
 	$precioByN = 0;
-	
 	/*Prepare Statement*/
 	if ($stmt = $mysqlCon->prepare($recuperaSubtotalByN)) {
 		/*Asociacion de parametros*/
@@ -370,9 +342,6 @@ function recuperaSubtotalByN($mysqlCon){
 		echo "NO SE EJECUTA";
 	}
 	return $precioByN;
-	
 }
-
-
 
 ?>

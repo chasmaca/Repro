@@ -113,18 +113,24 @@ function recuperaInformesMesAdmin( $anio, $dpto,$subdpto){
 		$informeResult = mysqli_query($mysqlCon,$generaInformeMes);
 
 
+		$totalGrupo = 0;
 		while($row = $informeResult->fetch_assoc()) {
 			if(!$flag) {
 				// display field/column names as first row
-				echo implode("\t", array_keys($row)) . "\r\n";
+				echo implode("\t", array_keys($row)) . "\tSUBTOTAL\r\n";
 				$flag = true;
 			}
 			if ($row!=null){
+				$totalLinea = 0;
+				$totalLinea = $row['encuadernacion'] + $row['byn'] + $row['color'] + $row['varios'];
+				$totalGrupo = $totalGrupo + $totalLinea;
 				//array_walk($row, __NAMESPACE__ . '\cleanData');
-				echo implode("\t", array_values($row)) . "\r\n";
+				echo implode("\t", array_values($row)) . "\t".$totalLinea."\r\n";
 			}
 		}
+		echo "\t\t\t\t\t\t\t\t\tTOTAL\t".$totalGrupo."\r\n";
 }
+
 function recuperaInformesGlobalMesAdmin($anio, $dpto, $subdpto){
 
 	global $mysqlCon;
@@ -175,19 +181,24 @@ function recuperaInformesGlobalMesAdmin($anio, $dpto, $subdpto){
 	
 	$informeResult = mysqli_query($mysqlCon,$generaInformeMes);
 	
-	
+	$totalGrupo = 0;
 	while($row = $informeResult->fetch_assoc()) {
 	
 		if(!$flag) {
 			// display field/column names as first row
-			echo implode("\t", array_keys($row)) . "\r\n";
+			echo implode("\t", array_keys($row)) . "\tSUBTOTAL\r\n";
 			$flag = true;
 		}
 		if ($row!=null){
 			//array_walk($row, __NAMESPACE__ . '\cleanData');
-			echo implode("\t", array_values($row)) . "\r\n";
+			$totalLinea = 0;
+			$totalLinea = $row['totalImpresoras'] + $row['totalMaquinas'] + $row['encuadernacion'] + $row['byn'] + $row['color'] + $row['varios'];
+			$totalGrupo = $totalGrupo + $totalLinea;
+			
+			echo implode("\t", array_values($row)) . "\t".$totalLinea."\r\n";
 		}
 	}
+	echo "\t\t\t\t\t\t\tTOTAL\t".$totalGrupo."\r\n";
 }
 
 

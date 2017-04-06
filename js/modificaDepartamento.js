@@ -1,123 +1,112 @@
-function cargaValoresDpto(){
-	if (document.getElementById('departamento').value != 0){
-		document.forms[0].action="cargaDepartamentos.php";
-		document.forms[0].submit();
+$(document).ready(function(){
+	
+	// recuperaDepartamento será nuestra función recuperar los departamentos
+	var recuperaDepartamento = function(){
+		
+		return $.getJSON("../dao/select/departamentoJSON.php", {
+
+		});
+		
 	}
-}
+	
+	/*Cargamos el combo de departamentos*/
+	recuperaDepartamento().done(function(response) {
+		
+		if (!response.success) {
+
+			alert("Problema con el JSON");
+
+		}else{
+			
+			var array = $.map(response.data, function(value, index) {
+				return [value];
+	
+			});
+			
+			if (array.length==0){
+				
+				alert("no hay datos de departamentos");
+			
+			}else{
+				
+				var valor = "--";
+				var texto = "Seleccione el Departamento";
+				
+				$('#departamento').append($("<option></option>").attr("value",valor).text(texto));
+				
+				for(var x=0; x<array.length;x++){
+
+					$('#departamento').append($("<option></option>").attr("value",array[x].identificador).text(array[x].ceco + " - " + array[x].descripcion)); 
+				
+				}
+			}
+		}
+
+	})
+	//Error en la consulta o comunicacion con la bbdd.
+	.fail(function(jqXHR, textStatus, errorThrown) {
+		alert("Algo ha fallado: " + textStatus + "-->" + jqXHR.responseText);
+	});
+	
+	$(document).on("change","#departamento",function() {
+
+		var texto = $("#departamento option:selected").text();
+		var ceco = texto.substring(0, texto.indexOf('-'));
+		var departamento = texto.substring(texto.indexOf('-')+1, texto.length);
+		
+		$("#nombreDepartamento").val(departamento.trim());
+		
+		$("#CeCo").val(ceco.trim());
+
+	});
+
+	$(document).on("click","#modificaDpto",function() {
+		if (validaFormulario()){
+			$.ajax({
+				type:     "get",
+		        data: 
+		        { 
+		        	
+		        	departamentoId:	$("#departamento").val(),
+		        	departamentoNombre: $("#nombreDepartamento").val(),
+		        	departamentoCeco: $("#CeCo").val()
+
+	        	},
+		        url: "../dao/update/updateDepartamentoJSON.php",
+			    success: function (data) {
+		        	alert ("Se ha realizado la modificación del departamento");
+		        	location.href="../formularios/modificaDepartamento.php";
+		        },
+        		error: function(xhr, status, error) {
+        			if (xhr.readyState == 4){
+        				alert ("Se ha realizado la modificación del departamento");
+    		        	location.href="../formularios/modificaDepartamento.php";
+        			}else{
+        			  var err = xhr.responseText;
+        			  alert(err.Message);
+        			}
+        		}
+			});
+		}
+		
+	});
+	
+});
 
 function validaFormulario(){
 	
-	var ok = 0;
+	var ok = true;
 	
 	if (document.getElementById('nombreDepartamento').value == ""){
 		alert ("Debe rellenar el departamento");
-		ok = 1;
+		ok = false;
 	}
 	
 	if (document.getElementById('CeCo').value == ""){
 		alert ("Debe rellenar el CeCo");
-		ok = 1;
+		ok = false;
 	}
-//	
-//	if (document.getElementById('treintabarra').value == "30/"){
-//		alert ("Debe rellenar el Código 30/");
-//		ok = 1;
-//	}
 
-	if (ok == 0){
-		document.forms[0].submit();
-	}
-		//
+	return ok;
 }
 
-function cargaValoresSubDpto(){
-	if (document.getElementById('departamento').value != 0){
-		document.forms[0].action="modificaSubDepartamento.php";
-		document.forms[0].submit();
-	}
-}
-
-function cargaValoresSubDptoBorrado(){
-	if (document.getElementById('departamento').value != 0){
-		document.forms[0].action="borraSubDepartamento.php";
-		document.forms[0].submit();
-	}
-}
-
-function cargaValoresForm(){
-	if (document.getElementById('departamento').value != 0 || document.getElementById('subdepartamento').value != 0){
-		cadena = document.getElementById('arrayValores').value;
-		if (cadena.indexOf("|") != -1){
-			cadenaPartida = cadena.split("|");
-			for(var x=0; x< cadenaPartida.length; x++){
-				cadenaUnica = cadenaPartida[x].split(";");
-				if (document.getElementById('subdepartamento').value == cadenaUnica[1]){
-					document.getElementById("nombreSubDepartamento").value = cadenaUnica[2];
-					document.getElementById("treintabarra").value = cadenaUnica[3];
-				}
-			}
-		}else{
-			cadenaUnica = cadena.split(";");
-			document.getElementById("nombreSubDepartamento").value = cadenaUnica[2];
-			document.getElementById("treintabarra").value = cadenaUnica[3];
-		}
-			
-	}
-}
-
-
-function validaFormularioSub(){
-	
-	var ok = 0;
-	
-
-	if (document.getElementById('departamento').value == "0"){
-		alert ("Debe seleccionar el Departamento");
-		ok = 1;
-	}
-
-	
-	if (document.getElementById('subdepartamento').value == "0"){
-		alert ("Debe Seleccionar el Subdepartamento");
-		ok = 1;
-	}
-	
-	if (document.getElementById('nombreSubDepartamento').value == ""){
-		alert ("Debe rellenar el Subdepartamento");
-		ok = 1;
-	}
-	
-	if (document.getElementById('treintabarra').value == ""){
-		alert ("Debe rellenar el Código 30/");
-		ok = 1;
-	}
-//	
-//	if (document.getElementById('treintabarra').value == "30/"){
-//		alert ("Debe rellenar el Código 30/");
-//		ok = 1;
-//	}
-
-	if (ok == 0){
-		document.forms[0].submit();
-	}
-		//
-}
-
-function validaFormularioBorrar(){
-	var ok = 0;
-	
-	if (document.getElementById('departamento').value == "0"){
-		alert ("Debe seleccionar el Departamento");
-		ok = 1;
-	}
-
-	
-	if (document.getElementById('subdepartamento').value == "0"){
-		alert ("Debe Seleccionar el Subdepartamento");
-		ok = 1;
-	}
-	
-	if (ok == 0){
-		document.forms[0].submit();
-	}
-}

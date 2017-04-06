@@ -162,15 +162,15 @@ $resultDepartamento = cargarTodosDepartamentos();
 					<tbody>
 						<tr>
 							<td id="solId"><?php echo $fila['solicitud_id'];?></td>
-							<td ><?php echo $fila['departamentos_desc'];?></td>
-							<td ><?php echo $fila['subdepartamento_desc'];?></td>
-							<td ><?php echo $fila['nombre_solicitante'] . " " .$fila['apellidos_solicitante'];?></td>
-							<td ><?php echo $fila['email_solicitante'];?></td>
-							<td ><?php echo $fila['nombre'];?> <?php echo $fila['apellido'];?></td>
-							<td ><?php echo $fila['descripcion_solicitante'];?></td>
-							<td ><?php echo $fila['status_desc'];?></td>
-							<td ><?php echo $fila['fecha_alta'];?></td>
-							<td ><?php echo $fila['fecha_cierre'];?></td>
+							<td style="overflow:hidden;max-width:20px;"><?php echo utf8_encode($fila['departamentos_desc']);?></td>
+							<td style="overflow:hidden;max-width:20px;"><?php echo utf8_encode($fila['subdepartamento_desc']);?></td>
+							<td style="overflow:hidden;max-width:20px;"><?php echo utf8_encode($fila['nombre_solicitante']) . " " . utf8_encode($fila['apellidos_solicitante']);?></td>
+							<td style="overflow:hidden;max-width:20px;"><?php echo utf8_encode($fila['email_solicitante']);?></td>
+							<td style="overflow:hidden;max-width:20px;"><?php echo utf8_encode($fila['nombre']);?> <?php echo utf8_encode($fila['apellido']);?></td>
+							<td style="overflow:hidden;max-width:20px;"><?php echo utf8_encode($fila['descripcion_solicitante']);?></td>
+							<td style="overflow:hidden;max-width:20px;"><?php echo utf8_encode($fila['status_desc']);?></td>
+							<td style="overflow:hidden;max-width:20px;"><?php echo $fila['fecha_alta'];?></td>
+							<td style="overflow:hidden;max-width:20px;"><?php echo $fila['fecha_cierre'];?></td>
 							<td >
 <?php 
 							if ($fila['status_id'] == 6){

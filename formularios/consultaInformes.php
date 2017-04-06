@@ -38,10 +38,10 @@ if( isset($_POST['anioParam']) && isset($_POST['depParametro']) && isset($_POST[
 	
 	
 	if ($tipoInforme == 'global')
-		$recuperaInformeArray = recuperaInformesGlobalMesAdmin($mysqlCon,$anio,$dpto, $subdpto);
+		$recuperaInformeArray = recuperaInformesGlobalMesAdminListado($mysqlCon,$anio,$dpto, $subdpto);
 	
 	if ($tipoInforme == 'detalle')
-		$recuperaInforme = recuperaInformesMesAdmin($mysqlCon,$anio,$dpto, $subdpto);
+		$recuperaInforme = recuperaInformesMesAdminConsulta($mysqlCon,$anio,$dpto, $subdpto);
 	
 }else{
 	$anio = 0;
@@ -287,19 +287,19 @@ if (!empty($_POST["subdepartamento"])){
 								}else{
 									
 									while ($fila = mysqli_fetch_assoc($recuperaInforme)) {
-									$total = $fila['precioByN'] + $fila['precioColor'] + $fila['precioEncuadernacion'] + $fila['PrecioVarios'];
+									$total = $fila['byn'] + $fila['color'] + $fila['encuadernacion'] + $fila['varios'];
 									?>
 									<tbody>
 									<tr>
-										<td><?php echo $fila['id'];?></td>
-										<td><?php echo $fila['CeCo'];?></td>
-										<td><?php echo $fila['departamentos_desc'];?></td>
+										<td><?php echo $fila['codigo'];?></td>
+										<td><?php echo $fila['ceco'];?></td>
+										<td><?php echo $fila['departamentoDesc'];?></td>
 										<td><?php echo $fila['subdepartamentos_desc'];?></td>
-										<td><?php echo $fila['fecha_cierre'];?></td>
-										<td><?php echo $fila['precioByN'];?></td>
-										<td><?php echo $fila['precioColor'];?></td>
-										<td><?php echo $fila['precioEncuadernacion'];?></td>
-										<td><?php echo $fila['PrecioVarios'];?></td>
+										<td><?php echo $fila['fechaCierre'];?></td>
+										<td><?php echo $fila['byn'];?></td>
+										<td><?php echo $fila['color'];?></td>
+										<td><?php echo $fila['encuadernacion'];?></td>
+										<td><?php echo $fila['varios'];?></td>
 										<td><?php echo $total ?></td>
 									</tr>
 									

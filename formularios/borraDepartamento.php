@@ -16,19 +16,7 @@ include ('../dao/select/departamento.php');
 <link rel="stylesheet" href="../css/estilos.css">
 <link rel="stylesheet" href="../css/styles.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript">
-    $(function() {
-      if ($.browser.msie && $.browser.version.substr(0,1)<7)
-      {
-		$('li').has('ul').mouseover(function(){
-			$(this).children('ul').show();
-			}).mouseout(function(){
-			$(this).children('ul').hide();
-			})
-      }
-    });       
-</script>
-<script src="../js/modificaDepartamento.js" type="text/javascript" ></script>
+<script src="../js/borraDepartamento.js" type="text/javascript" ></script>
 <title>Borrar Departamentos</title>
 </head>
 <body>
@@ -39,30 +27,17 @@ include_once($pathMenu);
 ?>
 <div id='cssformulario' class='cssformulario'>
 
-	<form name="borraDepartamento" id="borraDepartamento" method="post" action="../dao/insert/borrarDepartamento.php">
+	<form name="borraDepartamento" id="borraDepartamento">
 		<h2>Borrar Departamento</h2>
 			<div class="inset">
-			Seleccione el departamento a borrar:
-			<select name="departamento" id="departamento">
-				<option value="0">Seleccione el Departamento</option>
-				<?php 
-				$departamentoResult = recuperaTodosDepartamentos();
-				
-				while ($fila = mysqli_fetch_assoc($departamentoResult)) {
-				?>
-				<option value='<?php echo $fila["DEPARTAMENTO_ID"]; ?>'><?php echo $fila["DEPARTAMENTOS_DESC"]; ?></option>
-				<?php 
-				}
-				mysqli_free_result($departamentoResult);
-				?>
-			</select>
-			
-			<br/><br/>
-			<input type="submit" name="borraDpto" id="borraDpto" value="Borrar Departamento"/>
-			</div>
+				Seleccione el departamento a borrar:
+					<select name="departamento" id="departamento">
+						<option value="0">Seleccione el Departamento</option>
+					</select>
+					<br/><br/>
+					<input type="button" name="borraDpto" id="borraDpto" value="Borrar Departamento"/>
+				</div>
 			</form>
-			
-			
-</div>
-</body>
+		</div>
+	</body>
 </html>

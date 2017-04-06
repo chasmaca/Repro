@@ -13,7 +13,7 @@ include ('../dao/select/departamento.php');
         $id = "";
     
     if (!empty($_POST["descDepartamento"]))
-        $des = htmlspecialchars($_POST["descDepartamento"]);
+        $des = utf8_decode($_POST["descDepartamento"]);
     else
         $des = "";
     
@@ -33,18 +33,6 @@ include ('../dao/select/departamento.php');
 <link rel="stylesheet" href="../css/estilos.css">
 <link rel="stylesheet" href="../css/styles.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript">
-    $(function() {
-      if ($.browser.msie && $.browser.version.substr(0,1)<7)
-      {
-		$('li').has('ul').mouseover(function(){
-			$(this).children('ul').show();
-			}).mouseout(function(){
-			$(this).children('ul').hide();
-			})
-      }
-    });       
-</script>
 <script src="../js/modificaDepartamento.js" type="text/javascript" ></script>
 <title>Modificar Departamentos</title>
 </head>
@@ -61,38 +49,19 @@ include_once($pathMenu);
 			<h2>Modificar Departamento</h2>
 			<div class="inset">	
 			Seleccione el departamento a modificar:
-			<select name="departamento" id="departamento" onchange="javascript:cargaValoresDpto();">
-				<option value="0">Seleccione el Departamento</option>
-<?php 
-				$departamentoResult = recuperaTodosDepartamentos(); 
-				while ($fila = mysqli_fetch_assoc($departamentoResult)) {
-?>
-				<option value='<?php echo $fila["DEPARTAMENTO_ID"]; ?>'
-<?php 
-					   if ($id == $fila["DEPARTAMENTO_ID"]){
-?>
-					   selected 
-<?php 
-				        }
-?>
-				        >
-				<?php echo utf8_encode($fila["ceco"]) . " - " . utf8_encode($fila["DEPARTAMENTOS_DESC"]); ?>
-				</option>
-<?php 
-				}
-				mysqli_free_result($departamentoResult);
-?>
+			<select name="departamento" id="departamento">
+
 			</select>
 			
 			<br/><br/>
 			<span>Nombre del Departamento:</span>
-			<input type="text" id="nombreDepartamento" name="nombreDepartamento" value="<?php echo $des ?>"/> 
+			<input type="text" id="nombreDepartamento" name="nombreDepartamento" value="<?php echo utf8_encode($des); ?>"/> 
 			<br/><br/>
 			<span>CeCo:</span>
 			<input type="text" id="CeCo" name="CeCo" value="<?php echo $ceco ?>"/> 
 			<input type="hidden" id="idDepartamento" name="idDepartamento" value="<?php echo $id ?>"/>
 			<br/><br/>
-			<input type="button" name="modificaDpto" id="modificaDpto" value="Modificar Departamento" onclick="javascript:validaFormulario();"/>
+			<input type="button" name="modificaDpto" id="modificaDpto" value="Modificar Departamento"/>
 		</div>
 			</form>
 		</div>
