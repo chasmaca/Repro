@@ -14,7 +14,7 @@ include_once($pathClase);
 		<style>
 			.error {color: #FF0000;}
 		</style>
-		<link rel="stylesheet" type="text/css" href="/Repro/css/estilos.css"></link>
+		<link rel="stylesheet" type="text/css" href="/css/estilos.css"></link>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	</head>
 	<body> 
@@ -110,7 +110,7 @@ include_once($pathClase);
 						<?php echo utf8_encode($fila1["descripcion_solicitante"]); ?>
 						</td>
 						<td>
-						<?php echo utf8_encode($fila1["usuario_plantilla"]); ?>
+						<?php echo $fila1["usuario_plantilla"]; ?>
 						</td>
 						<td>
 							<a href='realizarTrabajo.php?solicitudId=<?php echo $fila1["solicitud_id"]; ?>' style="color:black;">Realizar Trabajo</a>

@@ -101,9 +101,8 @@ function recuperaInformesMesAdminConsulta($mysqlCon, $anio, $dpto,$subdpto){
 		
 	}
 //	$generaInformeMes .= " order by codigo";
-			
+	
 	$informeResult = mysqli_query($mysqlCon,$generaInformeMes);
-
 
 	if (!$informeResult) {
 		echo "No se pudo ejecutar con exito la consulta ($generaInformeMes) en la BD: " . mysql_error();
@@ -212,7 +211,6 @@ function recuperaInformesGlobalMesAdminListado($mysqlCon,$anio, $dpto, $subdpto)
 	if ($dpto == 'aa'){
 		$dpto = '%';
 	}
-	
 	
 	if ($stmt = $mysqlCon->prepare($generaInformeGlobalMesAdmin)) {
 		/*Asociacion de parametros*/

@@ -12,7 +12,7 @@ include_once($pathClase);
 		<style>
 			.error {color: #FF0000;}
 		</style>
-		<link rel="stylesheet" type="text/css" href="/Repro/css/style.css" >
+		<link rel="stylesheet" type="text/css" href="/css/style.css" >
 		
 		<script type="text/javascript" src="../js/detalleTrabajoModal.js" ></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ></script>

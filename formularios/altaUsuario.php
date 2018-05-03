@@ -32,7 +32,7 @@ include ('../dao/select/departamento.php');
       }
     });       
 </script>
-<script type="text/javascript" src="/Repro/js/nuevoUsuario.js"></script>
+<script type="text/javascript" src="/js/nuevoUsuario.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <title>Alta de usuario</title>
 </head>

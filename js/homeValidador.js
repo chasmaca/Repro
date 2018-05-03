@@ -124,8 +124,6 @@ $(document).ready(function(){
 						"</td>" +
 					"</tr>";
 					
-					//../dao/update/solicitud.php?solicitudId=" + array[x].solicitud_id + "&operacion=A
-					//javascript:habilitaCapa("+ array[x].solicitud_id +");' id='rechazo_solicitudId="+ array[x].solicitud_id +"
 					$(newRowContent).appendTo($("#informeValidador"));
 
 				}
@@ -224,18 +222,38 @@ $(document).ready(function(){
 		var id = $(this).attr("id");
 		var idFinal = id.replace("subdpto","");
 		var operacion = "2";
-		
-		modificarStatusSolicitud(idFinal,operacion).done(function(response) {
-			document.forms[0].action = "homeValidador.php";
-			document.forms[0].submit();
-		})
-		//Error en la consulta o comunicacion con la bbdd.
-		.fail(function(jqXHR, textStatus, errorThrown) {
-			
-			alert("Algo ha fallado: " + textStatus + "-->" + jqXHR.responseText);
-			document.forms[0].action = "homeValidador.php";
-			document.forms[0].submit();
+
+		document.getElementById("capa2").style.display = "block";
+		document.getElementById("capa2").style.opacity = "0.5";
+
+		$.ajax({
+			type:     "get",
+	        data: 
+	        { 
+	        	departamento: $("#nombreDepartamento").val(),
+        		ceco: $("#CeCo").val()
+        	},
+	        url: "../dao/insert/insertDepartamentoJSON.php",
+		    success: function (data) {
+	        	alert ("Se ha realizado el alta del departamento");
+	        	location.href="../formularios/altaDepartamento.php";
+	        },
+    		error: function(xhr, status, error) {
+    			  var err = eval("(" + xhr.responseText + ")");
+    			  alert(err.Message);
+    			}
 		});
+//		modificarStatusSolicitud(idFinal,operacion).done(function(response) {
+//			document.forms[0].action = "homeValidador.php";
+////			document.forms[0].submit();
+//		})
+//		//Error en la consulta o comunicacion con la bbdd.
+//		.fail(function(jqXHR, textStatus, errorThrown) {
+//			
+//			alert("Algo ha fallado: " + textStatus + "-->" + jqXHR.responseText);
+//			document.forms[0].action = "homeValidador.php";
+//			document.forms[0].submit();
+//		});
 	});
 
 	$(document).on("click",".rechazar",function() {

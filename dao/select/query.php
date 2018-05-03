@@ -60,7 +60,7 @@ $recuperaStatus = "select status_id from solicitud where solicitud_id = ?";
 $recuperaCorreoSolicitud = "select email_solicitante from solicitud where solicitud_id = ?";
 $recuperaAnio = "select distinct(YEAR(fecha_alta)) as fecha_alta from solicitud";
 $recuperaAnioMes = "SELECT YEAR( fecha_alta ) AS anio_alta, MONTH( fecha_alta ) AS mes_alta FROM solicitud group BY anio_alta , mes_alta ORDER BY anio_alta desc,mes_alta desc";
-$recuperaInformeDetalleValida = "select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = ";
+$recuperaInformeDetalleValida = "select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = ";
 $recuperaInformeGlobalValida =  "select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, sum(t1.precioEncuadernacion) as encuadernacion, sum(t1.precioByN) as byn, sum(t1.precioColor) as color, sum(t1.PrecioVarios) as varios from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id =";
 $consultaImpresoras = "SELECT IMPRESORA_ID, MODELO, EDIFICIO, UBICACION,FECHA,SERIE,NUMERO FROM impresoras order by UBICACION";
 $consultaImpresorasPorId = "SELECT IMPRESORA_ID, MODELO, EDIFICIO, UBICACION,FECHA,SERIE,NUMERO FROM impresoras WHERE IMPRESORA_ID = ?";
@@ -96,7 +96,7 @@ $generaInformeGlobalMesAdmin = "SELECT
 												m1.departamento_id=d1.departamento_id and 
 												month(m1.periodo) = ? and 
 												YEAR(m1.periodo) = ?
-										INNER JOIN 
+										LEFT OUTER JOIN 
 											trabajo t1 on 
 												t1.departamento_id = d1.departamento_id
                                                 and t1.solicitud_id in (
@@ -235,4 +235,36 @@ WHERE
 departamento_id in (?) AND MONTH(periodo) = ? AND YEAR(periodo) = ?";
 $recuperaTodosUsuarios = 
 "SELECT DISTINCT CONCAT(usuario.nombre, ' ', usuario.apellido) as nombre, role.role_desc as rol, departamento.departamentos_desc as nombreDepartamento from usuario inner join role on role.role_id = usuario.role_id inner join usuariodepartamento on usuariodepartamento.usuario_id = usuario.usuario_id inner join departamento on departamento.departamento_id = usuariodepartamento.departamento_id ORDER BY nombre, nombreDepartamento ASC";
+$variosUnoQuery = "select d1.tipo_id as tipo,d1.detalle_id as detalle,d1.descripcion as descripcion,d1.precio as precio,td.unidades as unidades,td.preciototal as preciototal
+from detalle d1 left OUTER join	trabajodetalle td on td.tipo_id=d1.tipo_id and td.detalle_id=d1.detalle_id and td.solicitud_id = ? where d1.tipo_id = 3";
+$colorQuery = "select d1.tipo_id as tipo,d1.detalle_id as detalle,d1.descripcion as descripcion,d1.precio as precio,td.unidades as unidades,td.preciototal as preciototal
+from detalle d1 left OUTER join	trabajodetalle td on td.tipo_id=d1.tipo_id and td.detalle_id=d1.detalle_id and td.solicitud_id = ? where d1.tipo_id = 4";
+$encuadernacionQuery = "select d1.tipo_id as tipo,d1.detalle_id as detalle,d1.descripcion as descripcion,d1.precio as precio,td.unidades as unidades,td.preciototal as preciototal
+from detalle d1 left OUTER join	trabajodetalle td on td.tipo_id=d1.tipo_id and td.detalle_id=d1.detalle_id and td.solicitud_id = ? where d1.tipo_id = 1";
+$encoladoQuery = "select d1.tipo_id as tipo,d1.detalle_id as detalle,d1.descripcion as descripcion,d1.precio as precio,td.unidades as unidades,td.preciototal as preciototal
+from detalle d1 left OUTER join	trabajodetalle td on td.tipo_id=d1.tipo_id and td.detalle_id=d1.detalle_id and td.solicitud_id = ? where d1.tipo_id = 2";
+$blancoYNegroQuery = "select d1.tipo_id as tipo,d1.detalle_id as detalle,d1.descripcion as descripcion,d1.precio as precio,td.unidades as unidades,td.preciototal as preciototal
+from detalle d1 left OUTER join	trabajodetalle td on td.tipo_id=d1.tipo_id and td.detalle_id=d1.detalle_id and td.solicitud_id = ? where d1.tipo_id = 5";
+$varios2Query = "select d1.tipo_id as tipo,d1.detalle_id as detalle,d1.descripcion as descripcion,d1.precio as precio,td.unidades as unidades,td.preciototal as preciototal
+from detalle d1 left OUTER join	trabajodetalle td on td.tipo_id=d1.tipo_id and td.detalle_id=d1.detalle_id and td.solicitud_id = ? where d1.tipo_id = 6";
+$varios2QueryTabla = "select d1.tipo_id as tipo,d1.detalle_id as detalle,d1.descripcion as descripcion,d1.precio as precio,td.unidades as unidades,td.preciototal as preciototal from detalle d1 inner join trabajodetalle td on td.tipo_id=d1.tipo_id and td.detalle_id=d1.detalle_id where d1.tipo_id = 6 and td.solicitud_id = ?";
+$varios2ExtraQuery = "select d1.tipo_id as tipo,d1.detalle_id as detalle,d1.descripcion as descripcion,d1.precio as precio,td.unidades as unidades,td.preciototal as preciototal
+from detalle d1 inner join trabajodetalle td on td.tipo_id=d1.tipo_id and td.detalle_id=d1.detalle_id and td.solicitud_id = ? where d1.tipo_id = 7";
+
+$consultaDetalleJSON = "SELECT unidades, preciototal FROM trabajodetalle WHERE trabajo_id = ? and tipo_id = ? and detalle_id = ? and solicitud_id = ?";
+$detalleVarios2PorId = "SELECT detalle_id, tipo_id, descripcion, precio from detalle where tipo_id = 6 and detalle_id = ?";
+$sentenciaDepartamentoJSON = "SELECT d1.departamentos_desc, d1.ceco from departamento d1 inner join solicitud s1 on s1.departamento_id = d1.departamento_id and s1.solicitud_id = ?";
+$sentenciaSubDepartamentoJSON = "SELECT d1.subdepartamento_desc, d1.treintabarra from subdepartamento d1 inner join solicitud s1 on s1.subdepartamento_id = d1.subdepartamento_id and s1.solicitud_id = ?";
+$sentenciaSolicitanteJSON = "SELECT nombre_solicitante as nombre, apellidos_solicitante as apellido from solicitud where solicitud_id = ?";
+$recuperaDetalleSubdepartamento = "SELECT departamento_id, subdepartamento_id, subdepartamento_desc, treintabarra from subdepartamento where departamento_id = ? and subdepartamento_id = ?";
+$sentenciaLogonJSON = "SELECT usuario_id, logon, password, nombre, apellido, role_id from usuario where logon = ? and password = ?";
+$consultaTrabajoJSON = "SELECT solicitud_id from trabajo where solicitud_id = ?";
+$consultaCeco = "SELECT d1.ceco from departamento d1 inner join solicitud s1 on s1.departamento_id = d1.departamento_id and s1.solicitud_id = ?";
+$consultaCodigo = "SELECT sd1.treintabarra from subdepartamento sd1 inner join solicitud s1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id and s1.solicitud_id = ?";
+$consultaDepartamentoId = "SELECT d1.departamento_id from departamento d1 inner join solicitud s1 on s1.departamento_id = d1.departamento_id and s1.solicitud_id = ?";
+$consultaSubDepartamentoId = "SELECT sd1.subdepartamento_id from subdepartamento sd1 inner join solicitud s1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id and s1.solicitud_id = ?";
+
+$comprobarVarios2ExtraJSON = "SELECT detalle_id, tipo_id, descripcion, precio from detalle where tipo_id=7 and  descripcion = ? and  precio = ?";
+$comprobarVarios2TrabajoExtraJSON = "SELECT trabajo_id, tipo_id, detalle_id, unidades,fecha_cierre,solicitud_id, preciototal from trabajodetalle where tipo_id=7 and solicitud_id = ? and detalle_id = ?";
+$listadoVarios2Query = "SELECT detalle_id, tipo_id, descripcion, precio from detalle where tipo_id = 7  and lower(descripcion) like ?";
 ?>

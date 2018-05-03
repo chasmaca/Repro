@@ -112,7 +112,8 @@ function recuperaInformesMesAdmin( $anio, $dpto,$subdpto){
 
 		$informeResult = mysqli_query($mysqlCon,$generaInformeMes);
 
-
+	echo $generaInformeMes;
+	exit;
 		$totalGrupo = 0;
 		while($row = $informeResult->fetch_assoc()) {
 			if(!$flag) {

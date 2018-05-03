@@ -290,17 +290,6 @@ th {
 	text-shadow: 0 1px 0 #000;	
 }
 
-th:after {
-	background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.08));
-	content: '';
-	display: block;
-	height: 25%;
-	left: 0;
-	margin: 1px 0 0 0;
-	position: absolute;
-	top: 25%;
-	width: 100%;
-}
 
 
 td {
@@ -327,4 +316,27 @@ td {
 .titulo{
 	display:inline-block;
 	white-space: nowrap;
+}
+
+.error{
+	position: fixed;
+    z-index: 1000;
+    background-color: black;
+    display: block;
+    color: white;
+    width: 30%;
+    vertical-align: top;
+	margin-left:30%;
+	padding-top: 20px; 
+    padding-right: 20px;
+    padding-left: 20px;	
+    vertical-align:top;
+	height:50%;
+}
+
+.tablaListadoResult{
+    width:100%;
+	height:70%;
+    overflow-x:hidden; 
+    overflow-y:scroll;
 }

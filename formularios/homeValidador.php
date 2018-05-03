@@ -15,7 +15,7 @@ include_once($pathPeriodo);
 		<style>
 			.error {color: #FF0000;}
 		</style>
-		<link rel="stylesheet" type="text/css" href="/Repro/css/estilos.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/estilos.css"/>
     	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homeValidador.js"></script>
 	</head>
@@ -50,6 +50,14 @@ include_once($pathPeriodo);
 				<textarea rows="5" cols="15" id="razonRechazo" name="razonRechazo"></textarea>
 				<a onclick="javascript:envioRechazo();" style="cursor: pointer;cursor: hand;" id="botonRechazo" class="enlaceboton"> <span>Rechazar</span></a>
 			</div>
+	
+			
+			<div style="position: relative; top:0px; width:100%; height:100%; display:none;" id="capa2">
+ 				<p>Introduzca el importe m&aacute;ximo aprobado (Puede dejarlo en blanco o 0 en caso que no haya l&iacute;mite:
+				<input type="text" id="maximo" name="maximo" style="width:20%;"/></p>
+				<a style="cursor: pointer;cursor: hand;" id="envioSolicitud" class="enlaceboton"> <span>Aprobar</span></a>
+			</div>
+		
 		
 			<br/><br/>
 			<input type="button" name="volver" id="volver" value="Volver"/> 

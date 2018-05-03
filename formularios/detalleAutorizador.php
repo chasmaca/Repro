@@ -8,7 +8,7 @@ include_once($pathPeriodo);
 ?>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/Repro/css/estilos.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/estilos.css"/>
     	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/detalleAutorizadorNoCache.js"></script>
 	</head>

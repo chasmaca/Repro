@@ -1,5 +1,9 @@
 <?php
 
+if(!isset($_SESSION['login'])){ //if login in session is not set
+	header("Location: ../index.php");
+}
+
 $path  = "../utiles/connectDBUtiles.php";
 $pathInsert = "../dao/insert/inserciones.php";
 $pathUpdate = "../dao/update/updates.php";

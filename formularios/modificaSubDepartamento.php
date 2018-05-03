@@ -64,20 +64,7 @@
 <link rel="stylesheet" href="../css/estilos.css">
 <link rel="stylesheet" href="../css/styles.css">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript">
-    $(function() {
-      if ($.browser.msie && $.browser.version.substr(0,1)<7)
-      {
-		$('li').has('ul').mouseover(function(){
-			$(this).children('ul').show();
-			}).mouseout(function(){
-			$(this).children('ul').hide();
-			})
-      }
-    });       
-</script>
-<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script src="../js/modificaDepartamento.js" type="text/javascript" ></script>
+<script src="../js/modificaSubDepartamento.js" type="text/javascript" ></script>
 <title>Modificar SubDepartamentos</title>
 </head>
 <body>
@@ -94,50 +81,15 @@ include_once($pathMenu);
 			<div class="inset">	
 			
 			Seleccione el departamento a modificar:
-			<select name="departamento" id="departamento" onchange="javascript:cargaValoresSubDpto();">
-				<option value="0">Seleccione el Departamento</option>
-<?php 
-				$departamentoResult = recuperaTodosDepartamentos(); 
-				while ($fila = mysqli_fetch_assoc($departamentoResult)) {
-?>
-				<option value='<?php echo $fila["DEPARTAMENTO_ID"]; ?>'
-<?php 
-					   if ($id == $fila["DEPARTAMENTO_ID"]){
-?>
-					   selected 
-<?php 
-				        }
-?>
-				        >
-				<?php echo utf8_encode($fila["DEPARTAMENTOS_DESC"]); ?>
-				</option>
-<?php 
-				}
-				mysqli_free_result($departamentoResult);
-?>
-    			</select>
+			<select name="departamento" id="departamento" >
+
+				</select>
     			<br/><br/>
 				
 				Seleccione el subdepartamento a modificar:
-				<select name="subdepartamento" id="subdepartamento" onchange="javascript:cargaValoresForm();">
+				<select name="subdepartamento" id="subdepartamento">
 					<option value="0">Seleccione el SubDepartamento</option>
-<?php 
-                    for ($row = 0; $row < sizeof($cadenaValor); $row++){
-                        if ($cadenaValor[$row][1] != null){
-?>
-							<option value="<?php echo $cadenaValor[$row][1]; ?>"
-<?php 
-					           if ($idSub == $cadenaValor[$row][1]){
-?>
-								   selected 
-<?php 
-                                }
-?>
-							> <?php echo utf8_encode($cadenaValor[$row][2]);?></option>
-<?php
-                        }
-                    }
-?>
+
     			</select>
     			<br/><br/>
 				<input type="hidden" name="arrayValores" id="arrayValores" value="<?php print_r ($valores); ?>"/>
@@ -149,7 +101,7 @@ include_once($pathMenu);
     			<input type="text" id="treintabarra" name="treintabarra" value="<?php echo $treinta; ?>"/> 
     			<br/><br/>
 
-    			<input type="button" name="modificaSubDpto" id="modificaSubDpto" value="Modificar SubDepartamento" onclick="javascript:validaFormularioSub();"/>
+    			<input type="button" name="modificaSubDpto" id="modificaSubDpto" value="Modificar SubDepartamento"/>
 			</div>
 			</form>
 		</div>

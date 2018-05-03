@@ -32,7 +32,8 @@ if ($periodo != "" && $departamento != "" && $subdepartamento != "" && $tipoInfo
 	if ($tipoInforme == 'global')
 		mostrarListadoGlobalGestor($periodo,$departamento,$subdepartamento,$tipoInforme);
 	else
-		mostrarListadoDetalleGestor($periodo,$departamento,$subdepartamento,$tipoInforme);
+//		mostrarListadoDetalleGestor($periodo,$departamento,$subdepartamento,$tipoInforme);
+		excelDetalleGestor($periodo,$departamento,$subdepartamento,$tipoInforme);
 }else{
 	echo "No se han recogido los parametros";
 }
@@ -219,5 +220,119 @@ function mostrarListadoDetalleGestor($periodo,$departamento,$subdepartamento,$ti
 	}
 	echo "\t\t\t\t\t\t\t\t\t\tTOTAL\t" . $totalGrupo . "\r\n";
 }
+
+function excelDetalleGestor($periodo,$departamento,$subdepartamento,$tipoInforme){
+
+	header("Content-Disposition: attachment; filename=Informe_Detalle_Gestor.xls");
+	header("Content-Type: application/vnd.ms-excel");
+	$flag = false;
+	
+	global $generaInformeMes, $jsondata,$mysqlCon;
+
+	$anioPartido = explode("/",$periodo);
+
+	$generaInformeMes = $generaInformeMes . $anioPartido[1] . " and month(s1.fecha_cierre) = " . $anioPartido[0];
+
+	if ($departamento != 0 && $departamento != "aa")
+		$generaInformeMes = $generaInformeMes . " and s1.departamento_id = " . $departamento;
+
+
+
+		$resumentSub = "";
+		if ($subdepartamento == "aa"){
+			if ($departamento =="aa"){
+
+			}else{
+
+				$subdepartamentoList = recuperaSubXDpto($departamento);
+				//	$subdpto4Usuario = cargarDptoSessionAsArray($usuario);
+				for ($row = 0; $row < sizeof($subdepartamentoList); $row++){
+					if ($resumentSub=="")
+						$resumentSub = $subdepartamentoList[$row][1];
+						else
+							$resumentSub = $resumentSub . "," . $subdepartamentoList[$row][1];
+								
+				}
+				$generaInformeMes = $generaInformeMes . " and s1.subdepartamento_id in (" . $resumentSub . ") ";
+
+			}
+
+		}else{
+
+			if ($subdepartamento!=0)
+				$generaInformeMes = $generaInformeMes . " and s1.subdepartamento_id = " . $subdepartamento;
+
+		}
+
+		if ($departamento =="aa"){
+			$generaInformeMes .= " UNION
+		select
+		'treintabarra' as codigo, 'cecoImpresoras' as ceco,
+		i.departamento_id as departamentoId, concat('Impresoras ', d1.departamentos_desc)  as departamentoDesc, i.periodo as fechaCierre,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Impresoras' as subdepartamentos_desc
+		from gastos_impresora i inner join departamento d1 on i.departamento_id=d1.departamento_id  where YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+
+			$generaInformeMes .= " UNION
+		select
+		'treintabarraMaq' as codigo,  'cecoMaquinas' as ceco,
+		i.departamento_id as departamentoId,  concat('Maquinas ', d1.departamentos_desc)  as departamentoDesc, i.periodo as fechaCierre,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Maquinas' as subdepartamentos_desc
+		from gastos_maquina i inner join departamento d1 on i.departamento_id=d1.departamento_id where YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) =  " . $anioPartido[0];
+
+		}else{
+			$generaInformeMes .= " UNION
+		select
+		'treintabarra' as codigo, 'cecoImpresoras' as ceco,
+		i.departamento_id as departamentoId, 'Impresoras' as departamentoDesc, i.periodo as fechaCierre,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Impresoras' as subdepartamentos_desc
+		from gastos_impresora i where i.departamento_id = " . $departamento ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+				
+			$generaInformeMes .= " UNION
+		select
+		'treintabarraMaq' as codigo, 'cecoMaquinas' as ceco,
+		i.departamento_id as departamentoId, 'Maquinas' as departamentoDesc, i.periodo as fechaCierre,
+		ROUND(byn_total,2) as byn, ROUND(color_total,2) as color,
+		0 as encuadernacion,
+		0 as varios,
+		'Maquinas' as subdepartamentos_desc
+		from gastos_maquina i where i.departamento_id = " . $departamento ." and YEAR(i.periodo) = " . $anioPartido[1] . " and month(i.periodo) = " . $anioPartido[0];
+
+		}
+
+		/**
+		 *
+		 * select sd1.treintabarra as codigo, d1.CeCo mas ceco,t1.departamento_id as departamentoId,d1.departamentos_desc as departamentoDesc,s1.fecha_cierre as fechaCierre, t1.precioByN as byn,t1.precioColor as color, t1.precioEncuadernacion as encuadernacion,t1.PrecioVarios as varios, sd1.subdepartamento_desc as subdepartamentos_desc
+		 */
+
+		$informeResult = mysqli_query($mysqlCon,$generaInformeMes);
+		$totalGrupo = 0;
+		while($row = $informeResult->fetch_assoc()) {
+			if(!$flag) {
+				// display field/column names as first row
+				echo implode("\t", array_keys($row)) . "\t SUBTOTAL \r\n";
+				$flag = true;
+			}
+			if ($row!=null){
+				//array_walk($row, __NAMESPACE__ . '\cleanData');
+				$totalLinea = 0;
+				$totalLinea = $row['encuadernacion'] + $row['byn'] + $row['color'] + $row['varios'] ;
+				$totalGrupo = $totalGrupo + $totalLinea;
+				if ($totalLinea!=0)
+					echo implode("\t", array_values($row)) . "\t".$totalLinea."\r\n";
+			}
+		}
+		echo "\t\t\t\t\t\t\t\t\t\tTOTAL\t" . $totalGrupo . "\r\n";
+		
+}
+
 
 ?>

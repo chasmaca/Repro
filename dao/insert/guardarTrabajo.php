@@ -167,9 +167,11 @@ function insertaDetalle($mysqlCon,$sentenciaInsertDetalle){
 	$precio = 0;
 	//Recuperamos los datos.
 
-	if ($tablaValores7!=null)
+	if ($tablaValores7!=null){
 		insertaExtra($tablaValores7,$mysqlCon);
-
+		exit;
+	}
+	
 	$espiralRs = recuperaDetalleEspiral($mysqlCon);
 
 	$encoladoRs = recuperaDetalleEncolado($mysqlCon);
@@ -281,10 +283,11 @@ function actualizaDetalle($mysqlCon){
  	$valores5 = explode(";", $tablaValores5);
  	$valores6 = explode(";", $tablaValores6);
 
- 	if ($tablaValores7!=null)
- 
+ 	if ($tablaValores7!=null){
 		insertaExtra($tablaValores7,$mysqlCon);
-
+	
+ 	}
+ 	
  	for($i = 0, $c = count($valores1); $i < $c; $i++){
 
  		if ($valores1[$i] !== ""){
@@ -418,9 +421,6 @@ function cierraTrabajo($mysqlCon){
 	global $solicitud,$sentenciaCierreSolicitud;
 	$status = 5;
 
-	//Soy incapaz de introducir la fecha con un bind--- REVISAR---
-	//date_default_timezone_set("Europe/Madrid");
-	//$fecha = date("d/m/Y");
 
 	if ($stmt = $mysqlCon->prepare($sentenciaCierreSolicitud)) {
 
@@ -679,9 +679,12 @@ function insertaExtra($tablaValores7,$conexion){
 	$observaciones = "";
 	$fechaCierre = "";
 
+	echo count($valores1);
+	
 	for($i = 0; $i < count($valores1); $i++){
 		$detalle = 0;
 		if ($valores1[$i] !== ""){
+			echo "pasamos por aqui n veces <br>";		
 			$valores11 = explode("#", $valores1[$i]);
 			$tipo = substr($valores11[0], 0, strpos($valores11[0], "-"));
 			$detalle = recuperaMaximoPorTipo($conexion, 7);
@@ -693,20 +696,20 @@ function insertaExtra($tablaValores7,$conexion){
 
 			$stmt = $conexion->prepare($sentenciaInsertaExtra);
 			$stmt->bind_param('iisd',$detalle,$tipo,$descripcion,$precio);
-			
-			$stmt->execute();
+		//	$stmt->execute();
+			$stmt->close();
 			
 			$fechaCierre = null;
 			$stmt1 = $conexion->prepare($sentenciaInsertDetalle);
 			
 			$stmt1->bind_param('iiiissid',$trabajo,$tipo,$detalle,$unidades,$observaciones,$fechaCierre,$solicitud,$precioTotal);
-			$stmt1->execute();
-				
+		//	$stmt1->execute();
+			$stmt1->close();
 			
 		}
 	}
-	$stmt->close();
-	$stmt1->close();
+	
+	
 	
 }
 ?>

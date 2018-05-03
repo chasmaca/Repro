@@ -1,0 +1,101 @@
+Query: insert into detalle (detalle_id, tipo_id, descripcion, precio) values (?,?,?,?)
+idMaxVarios: 22
+tipo: 7
+descripcion: prueba1
+precio: 12
+-------------------------
+Query: insert into detalle (detalle_id, tipo_id, descripcion, precio) values (?,?,?,?)
+idMaxVarios: 23
+tipo: 7
+descripcion: prueba1
+precio: 12
+-------------------------
+Query: insert into detalle (detalle_id, tipo_id, descripcion, precio) values (?,?,?,?)
+idMaxVarios: 24
+tipo: 7
+descripcion: pruebaJesus
+precio: 11
+-------------------------
+Query: insert into detalle (detalle_id, tipo_id, descripcion, precio) values (?,?,?,?)
+idMaxVarios: 1
+tipo: 7
+descripcion: prueba1
+precio: 11
+-------------------------
+Query: insert into detalle (detalle_id, tipo_id, descripcion, precio) values (?,?,?,?)
+idMaxVarios: 2
+tipo: 7
+descripcion: prueba2
+precio: 1.78
+error: 
+-------------------------
+Query: insert into detalle (detalle_id, tipo_id, descripcion, precio) values (?,?,?,?)
+idMaxVarios: 3
+tipo: 7
+descripcion: prueba3
+precio: 15.23
+error: 
+-------------------------
+Sucessful Query: insert into trabajodetalle (trabajo_id, tipo_id, detalle_id, unidades, solicitud_id,preciototal) values (?,?,?,?,?,?)
+trabajo_id: 1
+tipo_id: 7
+detalle_id: 11
+unidades: 12
+solicitud: 510
+preciototal: 31.20
+error: 
+-------------------------
+Sucessful Query: insert into trabajodetalle (trabajo_id, tipo_id, detalle_id, unidades, solicitud_id,preciototal) values (?,?,?,?,?,?)
+trabajo_id: 1
+tipo_id: 7
+detalle_id: 12
+unidades: 13
+solicitud: 510
+preciototal: 26.00
+error: 
+-------------------------
+Sucessful Query: insert into trabajodetalle (trabajo_id, tipo_id, detalle_id, unidades, solicitud_id,preciototal) values (?,?,?,?,?,?)
+trabajo_id: 1
+tipo_id: 7
+detalle_id: 13
+unidades: 2
+solicitud: 536
+preciototal: 1428.00
+error: 
+-------------------------
+Sucessful Query: insert into trabajodetalle (trabajo_id, tipo_id, detalle_id, unidades, solicitud_id,preciototal) values (?,?,?,?,?,?)
+trabajo_id: 1
+tipo_id: 7
+detalle_id: 14
+unidades: 2
+solicitud: 536
+preciototal: 14.28
+error: 
+-------------------------
+Sucessful Query: insert into trabajodetalle (trabajo_id, tipo_id, detalle_id, unidades, solicitud_id,preciototal) values (?,?,?,?,?,?)
+trabajo_id: 1
+tipo_id: 7
+detalle_id: 15
+unidades: 2
+solicitud: 557
+preciototal: 24.00
+error: 
+-------------------------
+Sucessful Query: insert into trabajodetalle (trabajo_id, tipo_id, detalle_id, unidades, solicitud_id,preciototal) values (?,?,?,?,?,?)
+trabajo_id: 1
+tipo_id: 7
+detalle_id: 16
+unidades: 10
+solicitud: 12
+preciototal: 100.00
+error: 
+-------------------------
+Sucessful Query: insert into trabajodetalle (trabajo_id, tipo_id, detalle_id, unidades, solicitud_id,preciototal) values (?,?,?,?,?,?)
+trabajo_id: 1
+tipo_id: 7
+detalle_id: 17
+unidades: 10
+solicitud: 12
+preciototal: 110.00
+error: 
+-------------------------

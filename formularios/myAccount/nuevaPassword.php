@@ -15,7 +15,7 @@ function envioMail($email){
 	$para  = $email;
 	global $nombre,$mensajeFinal;
 
-	ini_set("sendmail_from", "apps@eneasp.com");
+	ini_set("sendmail_from", "info@eneasp.com");
 
 	// título
 	$titulo = 'Se ha registrado una solicitud de cambio de contraseña.';
@@ -27,7 +27,7 @@ function envioMail($email){
 	$mensaje .= '<div id="logo" style="display:inline-block;">';
 	$mensaje .= '<div id="logo_text">';
 	$mensaje .= '<div id="logo-enea" style="display:inline;">';
-	$mensaje .= '<img src="http://www.eneasp.com/Repro/images/logo_enea.gif" alt="Eneasp Reprografía" width="87" height="87">';
+	$mensaje .= '<img src="http://www.elpartedigital.com/images/logo_enea.gif" alt="Eneasp Reprografía" width="87" height="87">';
 	$mensaje .= '</div>';
 	$mensaje .= '<div id="logo-slogan" style="display: inline;font-size: 18px;font-weight: bold;">Soluciones a Empresarios</div>';
 	$mensaje .= '</div>';
@@ -36,7 +36,7 @@ function envioMail($email){
 	$mensaje .= '<br><br>';
 	$mensaje .= '<p>Buenos d&iacute;as:</p>';
 	$mensaje .= '<p>Se ha recibido una nueva solicitud de cambio de contrase&ntilde;a.</p>';
-	$mensaje .= '<p>Si usted ha realizado la petici&oacute;n, pulse <a href="http://www.eneasp.com/Repro/formularios/myAccount/crearPassword.php">AQU&Iacute;</a>.</p>';
+	$mensaje .= '<p>Si usted ha realizado la petici&oacute;n, pulse <a href="http://www.elpartedigital.com/formularios/myAccount/crearPassword.php">AQU&Iacute;</a>.</p>';
 	$mensaje .= '<p>Por favor, de no haber realizado la petición, ignore este correo.</p>';
 	$mensaje .= '<p>Gracias.</p>';
 	$mensaje .= '<p>Por favor, no responda a este mensaje, esta direcci&oacute;n de e-mail s&oacute;lo se utiliza para realizar env&iacute;os.</p>';
@@ -44,7 +44,7 @@ function envioMail($email){
 	$mensaje .= '</body>';
 	$mensaje .= '</html>';
 
-	$headers = "From: apps@eneasp.com" . "\r\n";
+	$headers = "From: info@eneasp.com" . "\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
@@ -63,9 +63,9 @@ function envioMail($email){
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="stylesheet" href="../../css/estilos.css" />
-		<script type="text/javascript" src="/Repro/js/gestion.js"> </script>
-		<script type="text/javascript" src="/Repro/js/jquery.1.4.2.min.js"> </script>
-		<script type="text/javascript" src="/Repro/js/select_replacement.1.0.0.js"> </script>
+		<script type="text/javascript" src="/js/gestion.js"> </script>
+		<script type="text/javascript" src="/js/jquery.1.4.2.min.js"> </script>
+		<script type="text/javascript" src="/js/select_replacement.1.0.0.js"> </script>
 		
 		<title>Cambio de Contrase&ntilde;a</title>
 	</head>

@@ -8,8 +8,8 @@ $pathCabecera = "../utiles/cabecera_formulario.php";
 		<style>
 			.error {color: #FF0000;}
 		</style>
-		<script type="text/javascript" src="/Repro/js/login.js"></script>
-		<link rel="stylesheet" type="text/css" href="/Repro/css/style.css">
+		<script type="text/javascript" src="/js/login.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
 		<script>
 		
 			function validaDatos(){

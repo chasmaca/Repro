@@ -13,9 +13,9 @@ $emailErr = $pwdErr = $pwdRepErr = "";
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="stylesheet" href="../../css/estilos.css" />
-		<script type="text/javascript" src="/Repro/js/gestion.js"> </script>
-		<script type="text/javascript" src="/Repro/js/jquery.1.4.2.min.js"> </script>
-		<script type="text/javascript" src="/Repro/js/select_replacement.1.0.0.js"> </script>
+		<script type="text/javascript" src="/js/gestion.js"> </script>
+		<script type="text/javascript" src="/js/jquery.1.4.2.min.js"> </script>
+		<script type="text/javascript" src="/js/select_replacement.1.0.0.js"> </script>
 		
 		<title>Cambio de Contrase&ntilde;a</title>
 	</head>

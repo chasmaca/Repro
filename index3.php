@@ -7,7 +7,7 @@ $pathCabecera = "utiles/cabecera_formulario.php";
 		<title>Reprografia</title>
 		<script type="text/javascript" src="./js/inicio.js"></script>
 		<link rel="stylesheet" href="css/estilos.css">
-		<script type="text/javascript" src="/Repro/js/login.js"></script>
+		<script type="text/javascript" src="/js/login.js"></script>
 		
 	</head>
 	<body>

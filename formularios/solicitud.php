@@ -53,7 +53,7 @@ function envioMail($email,$idSolicitud,$comentario){
 	$para  = $email;
 	global $nombre, $accion;
 
-	ini_set("sendmail_from", "apps@eneasp.com");
+	ini_set("sendmail_from", "info@eneasp.com");
 
 	// título
 	$titulo = 'Su petición de Reprografía ha sido Validada.';
@@ -68,7 +68,7 @@ function envioMail($email,$idSolicitud,$comentario){
 	$mensaje .= '<div id="logo" style="display:inline-block;">';
 	$mensaje .= '<div id="logo_text">';
 	$mensaje .= '<div id="logo-enea" style="display:inline;">';
-	$mensaje .= '<a href="http://www.eneasp.com/Repro"><img src="http://www.eneasp.com/Repro/images/logo_enea.gif" alt="Eneasp Reprografía" width="87" height="87"></a>';
+	$mensaje .= '<a href="http://www.elpartedigital.com"><img src="http://www.eneasp.com/images/logo_enea.gif" alt="Eneasp Reprografía" width="87" height="87"></a>';
 	$mensaje .= '</div>';
 	$mensaje .= '<div id="logo-slogan" style="display: inline;font-size: 18px;font-weight: bold;">Soluciones a Empresarios</div>';
 	$mensaje .= '</div>';
@@ -88,14 +88,14 @@ function envioMail($email,$idSolicitud,$comentario){
 		$mensaje .= "<p>Muchas Gracias.</p>";
 	}
 	$mensaje .= '<br/>';
-	$mensaje .= '<p>Si desea acceder a la aplicaci&oacute;n pulse <a href="http://www.eneasp.com/Repro">aqu&iiacute;</a>.';
+	$mensaje .= '<p>Si desea acceder a la aplicaci&oacute;n pulse <a href="http://www.elpartedigital.com">aqu&iiacute;</a>.';
 	$mensaje .= '<p>Por favor, no responda a este mensaje, esta direcci&oacute;n de e-mail s&oacute;lo se utiliza para realizar env&iacute;os.</p>';
 	$mensaje .= '</div>';
 	$mensaje .= '</body>';
 	$mensaje .= '</html>';
 	
 	
-	$headers = "From: apps@eneasp.com" . "\r\n";
+	$headers = "From: info@eneasp.com" . "\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 

@@ -15,7 +15,7 @@ include_once($pathClase);
 			.error {color: #FF0000;}
 		</style>
 		
-		<link rel="stylesheet" type="text/css" href="/Repro/css/style.css">
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
 		
 	</head>
 	<body> 

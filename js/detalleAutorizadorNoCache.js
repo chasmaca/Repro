@@ -214,7 +214,7 @@ $(document).ready(function(){
 													"<td>"+array[x].color+"</td>" +
 													"<td>"+array[x].varios+"</td>" +
 													"<td>"+array[x].nombre+"</td>" +
-													"<td>"+array[x].descripcion+"</td>" +
+													"<td>"+array[x].descripcion.trim()+"</td>" +
 													"<td>"+array[x].byn_maquina+"</td>" +
 													"<td>"+array[x].color_maquina+"</td>" +
 													"<td>"+array[x].byn_impresora+"</td>" +
@@ -258,10 +258,18 @@ $(document).ready(function(){
 								$(newRowContent).appendTo($("#informeValidador"));
 							totalAbsoluto = parseFloat(totalAbsoluto) + parseFloat(totalLinea);
 						}
-						var newRowTotal = "<tr class='trStyle'>"+
-								"<td colspan='8'><div style='float:right;'>Total Informe:</div></td>"+
-								"<td >"+parseFloat(totalAbsoluto).toFixed(2)+"</td>" +
-								"</tr>";
+						if (tipoInforme == 'global'){
+							var newRowTotal = "<tr class='trStyle'>"+
+							"<td colspan='8'><div style='float:right;'>Total Informe:</div></td>"+
+							"<td >"+parseFloat(totalAbsoluto).toFixed(2)+"</td>" +
+							"</tr>";
+						}else{
+							var newRowTotal = "<tr class='trStyle'>"+
+							"<td colspan='15'><div style='float:right;'>Total Informe:</div></td>"+
+							"<td >"+parseFloat(totalAbsoluto).toFixed(2)+"</td>" +
+							"</tr>";
+							
+						}
 						$(newRowTotal).appendTo($("#informeValidador"));
 					}
 				}

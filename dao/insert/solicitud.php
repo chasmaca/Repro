@@ -59,7 +59,8 @@ function envioMail($email,$idSolicitud){
 	$para  = $email;
 	global $nombre;
 	$mensajeValida = "";
-	ini_set("sendmail_from", "apps@eneasp.com");
+	ini_set("sendmail_from", "info@eneasp.com");
+	
 	
 	header('Content-Type: text/html; charset=utf-8');
 	
@@ -76,7 +77,7 @@ function envioMail($email,$idSolicitud){
 	$mensaje .= '<div id="logo" style="display:inline-block;">';
 	$mensaje .= '<div id="logo_text">';
 	$mensaje .= '<div id="logo-enea" style="display:inline;">';
-	$mensaje .= '<img src="http://www.eneasp.com/Repro/images/logo_enea.gif" alt="Eneasp Reprografía" width="87" height="87">';
+	$mensaje .= '<img src="http://www.elpartedigital.com/images/logo_enea.gif" alt="Eneasp Reprografía" width="87" height="87">';
 	$mensaje .= '</div>';
 	$mensaje .= '<div id="logo-slogan" style="display: inline;font-size: 18px;font-weight: bold;">Soluciones a Empresarios</div>';
 	$mensaje .= '</div>';
@@ -85,7 +86,7 @@ function envioMail($email,$idSolicitud){
 	$mensaje .= '<br><br>';
 	$mensaje .= '<p>Buenos d&iacute;as:</p>';
 	$mensaje .= '<p>Se ha recibido una nueva solicitud de reprograf&iacute;a.</p>';
-	$mensaje .= '<p>Por favor, acceda a la aplicaci&oacute;n para su gesti&oacute;n lo antes posible, pulsando <a href="http://www.eneasp.com/Repro">AQUI</a>.</p>';
+	$mensaje .= '<p>Por favor, acceda a la aplicaci&oacute;n para su gesti&oacute;n lo antes posible, pulsando <a href="http://www.elpartedigital.com/">AQUI</a>.</p>';
 	$mensaje .= '<p>Gracias.</p>';
 	$mensaje .= '<p>Por favor, no responda a este mensaje, esta direcci&oacute;n de e-mail s&oacute;lo se utiliza para realizar env&iacute;os.</p>';
 	$mensaje .= '</div>';
@@ -94,7 +95,7 @@ function envioMail($email,$idSolicitud){
 	$mensaje .= '</html>';
 	
 	
-	$headers = "From: apps@eneasp.com" . "\r\n";
+	$headers = "From: info@eneasp.com" . "\r\n";
 	$headers .= 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 	
@@ -115,7 +116,6 @@ function envioMail($email,$idSolicitud){
 		<style>
 			.error {color: #FF0000;}
 		</style>
-		<!-- link rel="stylesheet" type="text/css" href="/Repro/css/style.css"-->
 		<link rel="stylesheet" href="../../css/estilos.css" />
 	</head>
 	<body> 

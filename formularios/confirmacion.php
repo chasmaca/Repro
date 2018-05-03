@@ -1,10 +1,13 @@
 <?php
 
+if(!isset($_SESSION['login'])){ //if login in session is not set
+	header("Location: ../index.php");
+}
+
 $pathDB = "../utiles/connectDBUtiles.php";
 $pathCabecera = "../utiles/cabecera_formulario.php";
 
 include_once($pathDB);
-include_once($pathCabecera);
 
 $mensaje = htmlspecialchars($_GET["mensaje"]);
 $destino = "";
@@ -35,27 +38,27 @@ switch ($mensaje) {
 		break;
 	case 7:
 		$error = "Operacion Realizada Con Exito.";
-		$destino = "altaDepartamento.php";
+		$destino = "altaSubDepartamento.php";
 		break;
 	case 8:
 		$error = "Se ha producido un error, por favor, vuelva a intentarlo.";
-		$destino = "altaDepartamento.php";
+		$destino = "altaSubDepartamento.php";
 		break;
 	case 9:
 		$error = "Operacion Realizada Con Exito.";
-		$destino = "modificaDepartamento.php";
+		$destino = "modificaSubDepartamento.php";
 		break;
 	case 10:
 		$error = "Se ha producido un error, por favor, vuelva a intentarlo.";
-		$destino = "modificaDepartamento.php";
+		$destino = "modificaSubDepartamento.php";
 		break;
 	case 11:
 		$error = "Operacion Realizada Con Exito.";
-		$destino = "borraDepartamento.php";
+		$destino = "borraSubDepartamento.php";
 		break;
 	case 12:
 		$error = "Se ha producido un error, por favor, vuelva a intentarlo.";
-		$destino = "borraDepartamento.php";
+		$destino = "borraSubDepartamento.php";
 		break;
 	case 13:
 		$error = "Operacion Realizada Con Exito.";
@@ -123,16 +126,15 @@ switch ($mensaje) {
 		<style>
 			.error {color: #FF0000;}
 		</style>
-<link rel="stylesheet" href="../css/style-menu.css">
-<link rel="stylesheet" href="../css/estilos.css">
 
+		<link rel="stylesheet" href="../css/estilos.css">
+		<link rel="stylesheet" href="../css/styles.css">
 		<script type="text/javascript" src="../js/accion.js"></script>
 	</head>
 	<body> 
-<?php 
-	include_once($pathCabecera);
-?>
+<?php 	include_once($pathCabecera); ?>
 		<form name="modificaUsuarioConfirm" action="" method="post"  id="modificaUsuarioConfirm">
+		
 		 <h1>Peticion de Reprograf&iacute;a</h1>
 		  <div class="inset" style="text-align:center;">
 			<?php

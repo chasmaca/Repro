@@ -1,4 +1,8 @@
 <?php 
+if(!isset($_SESSION['login'])){ //if login in session is not set
+	header("Location: ../index.php");
+}
+
 $pathDB  = "../utiles/connectDBUtiles.php";
 $pathCabecera = "../utiles/cabecera_formulario.php";
 $pathAnalitica = "../utiles/analyticstracking.php";

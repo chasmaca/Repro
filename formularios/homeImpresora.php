@@ -17,7 +17,7 @@ $recuperaImpresoras = recuperaImpresoras();
 			.error {color: #FF0000;}
 		</style>
 		<script type="text/javascript" src="../js/impresoras.js"></script>
-		<link rel="stylesheet" type="text/css" href="/Repro/css/estilos.css"> </link>
+		<link rel="stylesheet" type="text/css" href="/css/estilos.css"> </link>
 	</head>
 	<body> 
 	<?php 

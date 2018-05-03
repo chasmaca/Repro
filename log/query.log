@@ -1,5 +1,5 @@
-User: ::1 - April 4, 2017, 12:01 am
-Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 135) and s1.departamento_id in (432)  and month(s1.fecha_validacion) = 3 and year(s1.fecha_validacion) = 2017 UNION
+User: ::1 - April 27, 2017, 1:50 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 137) and s1.departamento_id in (432)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
 			SELECT
 			'MAQUINA' AS esb,
 			'MAQUINA' AS codigo,
@@ -18,7 +18,7 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			'0' AS BYN_IMPRESORA,
 			'0'  AS COLOR_IMPRESORA
 			FROM gastos_maquina WHERE departamento_ID IN (432
-			) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 			UNION
 			SELECT
 			'IMPRESORA' AS esb,
@@ -37,10 +37,10 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			'0' AS COLOR_MAQUINA,
 			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
 			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
-			FROM gastos_impresora WHERE departamento_ID IN (432) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_impresora WHERE departamento_ID IN (432) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 -------------------------
-User: ::1 - April 4, 2017, 12:05 am
-Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 135) and s1.departamento_id in (432)  and month(s1.fecha_validacion) = 3 and year(s1.fecha_validacion) = 2017 UNION
+User: ::1 - June 19, 2017, 11:13 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 5 and year(s1.fecha_validacion) = 2017 UNION
 			SELECT
 			'MAQUINA' AS esb,
 			'MAQUINA' AS codigo,
@@ -58,8 +58,8 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
 			'0' AS BYN_IMPRESORA,
 			'0'  AS COLOR_IMPRESORA
-			FROM gastos_maquina WHERE departamento_ID IN (432
-			) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
 			UNION
 			SELECT
 			'IMPRESORA' AS esb,
@@ -78,10 +78,10 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			'0' AS COLOR_MAQUINA,
 			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
 			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
-			FROM gastos_impresora WHERE departamento_ID IN (432) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
 -------------------------
-User: ::1 - April 4, 2017, 12:07 am
-Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 135) and s1.departamento_id in (432)  and month(s1.fecha_validacion) = 3 and year(s1.fecha_validacion) = 2017 UNION
+User: ::1 - June 19, 2017, 11:13 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
 			SELECT
 			'MAQUINA' AS esb,
 			'MAQUINA' AS codigo,
@@ -99,8 +99,8 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
 			'0' AS BYN_IMPRESORA,
 			'0'  AS COLOR_IMPRESORA
-			FROM gastos_maquina WHERE departamento_ID IN (432
-			) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 			UNION
 			SELECT
 			'IMPRESORA' AS esb,
@@ -119,10 +119,10 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			'0' AS COLOR_MAQUINA,
 			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
 			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
-			FROM gastos_impresora WHERE departamento_ID IN (432) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 -------------------------
-User: ::1 - April 4, 2017, 12:10 am
-Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 135) and s1.departamento_id in (432)  and month(s1.fecha_validacion) = 3 and year(s1.fecha_validacion) = 2017 UNION
+User: ::1 - June 19, 2017, 11:14 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
 			SELECT
 			'MAQUINA' AS esb,
 			'MAQUINA' AS codigo,
@@ -140,8 +140,8 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
 			'0' AS BYN_IMPRESORA,
 			'0'  AS COLOR_IMPRESORA
-			FROM gastos_maquina WHERE departamento_ID IN (432
-			) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 			UNION
 			SELECT
 			'IMPRESORA' AS esb,
@@ -160,10 +160,10 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			'0' AS COLOR_MAQUINA,
 			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
 			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
-			FROM gastos_impresora WHERE departamento_ID IN (432) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 -------------------------
-User: ::1 - April 4, 2017, 12:14 am
-Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 135) and s1.departamento_id in (432)  and month(s1.fecha_validacion) = 3 and year(s1.fecha_validacion) = 2017 UNION
+User: ::1 - June 19, 2017, 11:15 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
 			SELECT
 			'MAQUINA' AS esb,
 			'MAQUINA' AS codigo,
@@ -181,8 +181,8 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
 			'0' AS BYN_IMPRESORA,
 			'0'  AS COLOR_IMPRESORA
-			FROM gastos_maquina WHERE departamento_ID IN (432
-			) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 			UNION
 			SELECT
 			'IMPRESORA' AS esb,
@@ -201,10 +201,10 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			'0' AS COLOR_MAQUINA,
 			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
 			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
-			FROM gastos_impresora WHERE departamento_ID IN (432) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 -------------------------
-User: ::1 - April 4, 2017, 12:15 am
-Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 135) and s1.departamento_id in (432)  and month(s1.fecha_validacion) = 3 and year(s1.fecha_validacion) = 2017 UNION
+User: ::1 - June 19, 2017, 11:18 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
 			SELECT
 			'MAQUINA' AS esb,
 			'MAQUINA' AS codigo,
@@ -222,8 +222,8 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
 			'0' AS BYN_IMPRESORA,
 			'0'  AS COLOR_IMPRESORA
-			FROM gastos_maquina WHERE departamento_ID IN (432
-			) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 			UNION
 			SELECT
 			'IMPRESORA' AS esb,
@@ -242,10 +242,10 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			'0' AS COLOR_MAQUINA,
 			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
 			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
-			FROM gastos_impresora WHERE departamento_ID IN (432) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 -------------------------
-User: ::1 - April 4, 2017, 12:22 am
-Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 135) and s1.departamento_id in (432)  and month(s1.fecha_validacion) = 3 and year(s1.fecha_validacion) = 2017 UNION
+User: ::1 - June 19, 2017, 11:19 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
 			SELECT
 			'MAQUINA' AS esb,
 			'MAQUINA' AS codigo,
@@ -263,8 +263,8 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
 			'0' AS BYN_IMPRESORA,
 			'0'  AS COLOR_IMPRESORA
-			FROM gastos_maquina WHERE departamento_ID IN (432
-			) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 			UNION
 			SELECT
 			'IMPRESORA' AS esb,
@@ -283,10 +283,10 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			'0' AS COLOR_MAQUINA,
 			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
 			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
-			FROM gastos_impresora WHERE departamento_ID IN (432) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 -------------------------
-User: ::1 - April 4, 2017, 12:24 am
-Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,s1.descripcion_solicitante as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 135) and s1.departamento_id in (432)  and month(s1.fecha_validacion) = 3 and year(s1.fecha_validacion) = 2017 UNION
+User: ::1 - June 19, 2017, 11:31 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
 			SELECT
 			'MAQUINA' AS esb,
 			'MAQUINA' AS codigo,
@@ -304,8 +304,8 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
 			'0' AS BYN_IMPRESORA,
 			'0'  AS COLOR_IMPRESORA
-			FROM gastos_maquina WHERE departamento_ID IN (432
-			) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
 			UNION
 			SELECT
 			'IMPRESORA' AS esb,
@@ -324,5 +324,620 @@ Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos
 			'0' AS COLOR_MAQUINA,
 			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
 			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
-			FROM gastos_impresora WHERE departamento_ID IN (432) AND MONTH(PERIODO) = 3 AND YEAR(PERIODO) = 2017
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 19, 2017, 11:32 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 5 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 19, 2017, 11:40 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:14 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 5 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:14 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:15 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:22 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:24 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:25 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 4 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 4 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:31 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 5 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:33 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 5 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:36 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 5 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:47 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 5 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 4:51 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 5 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 5:11 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 5 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+-------------------------
+User: ::1 - June 20, 2017, 5:20 pm
+Solicitud: select sd1.treintabarra as esb, de1.ceco as codigo, de1.departamentos_desc as departamento, sd1.subdepartamento_desc as subdepartamento, s1.nombre_solicitante as nombre, s1.apellidos_solicitante as apellidos,trim(s1.descripcion_solicitante) as descripcion, s1.fecha_cierre as fecha, t1.precioEncuadernacion as encuadernacion, t1.precioByN as byn, t1.precioColor as color, t1.PrecioVarios as varios, '0' AS BYN_MAQUINA, '0'  AS COLOR_MAQUINA, '0' AS BYN_IMPRESORA,  '0'  AS COLOR_IMPRESORA from solicitud s1 inner join trabajo t1 on s1.solicitud_id = t1.solicitud_id inner join departamento de1 on s1.departamento_id = de1.departamento_id inner join subdepartamento sd1 on s1.departamento_id = sd1.departamento_id and s1.subdepartamento_id = sd1.subdepartamento_id where s1.status_id = 6 and s1.departamento_id in (select ud1.departamento_id from usuariodepartamento ud1 where ud1.usuario_id = 55) and s1.departamento_id in (334,335)  and month(s1.fecha_validacion) = 5 and year(s1.fecha_validacion) = 2017 UNION
+			SELECT
+			'MAQUINA' AS esb,
+			'MAQUINA' AS codigo,
+			'MAQUINA' AS departamento,
+			'MAQUINA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
+			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
+			'0' AS BYN_IMPRESORA,
+			'0'  AS COLOR_IMPRESORA
+			FROM gastos_maquina WHERE departamento_ID IN (334,335
+			) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
+			UNION
+			SELECT
+			'IMPRESORA' AS esb,
+			'IMPRESORA' AS codigo,
+			'IMPRESORA' AS departamento,
+			'IMPRESORA' AS subdepartamento,
+			'' AS fecha,
+			'0' AS encuadernacion,
+			'0' AS byn,
+			'0' AS color,
+			'0' AS varios,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
+			'0' AS BYN_MAQUINA,
+			'0' AS COLOR_MAQUINA,
+			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
+			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
+			FROM gastos_impresora WHERE departamento_ID IN (334,335) AND MONTH(PERIODO) = 5 AND YEAR(PERIODO) = 2017
 -------------------------

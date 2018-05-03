@@ -5,10 +5,9 @@ $pathAnalitica = "utiles/analyticstracking.php";
 <html>
 	<head>
 		<title>Reprografia</title>
-		<script type="text/javascript" src="./js/inicio.js"></script>
 		<link rel="stylesheet" href="css/estilos.css">
-		<script type="text/javascript" src="/Repro/js/login.js"></script>
-		
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="js/index_usuarios.js" type="text/javascript" ></script>
 	</head>
 	<body>
 <?php
@@ -45,7 +44,7 @@ $pathAnalitica = "utiles/analyticstracking.php";
 		  </div>
 		  <p class="p-container">
 		    <span><a href="formularios/myAccount/myAccount.php" style="text-decoration: none;color:#0184ff;">Olvidaste la contrase&ntilde;a?</a></span>
-		    <input type="submit" name="go" id="go" value="Log in">
+		    <input type="button" name="goButton" id="goButton" value="Log in">
 		  </p>
 		</form>
 	</body>

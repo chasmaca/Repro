@@ -13,4 +13,8 @@ $sentenciaInsertImpresoras = "INSERT INTO impresoras (modelo,edificio,ubicacion,
 $sentenciaInsertSolicitud = "insert into solicitud (solicitud_id, departamento_id,nombre_solicitante,apellidos_solicitante,autorizador_id,descripcion_solicitante,email_solicitante,status_id,fecha_alta,subdepartamento_id) values (?,?,?,?,?,?,?,?,STR_TO_DATE(?, '%d/%m/%Y %r'),?)";
 $sentenciaInsertGastosImpresora = "insert into gastos_impresora (departamento_id,periodo,byn_unidades,byn_precio,byn_total,color_unidades,color_precio,color_total) values (?,?,?,?,?,?,?,?)";
 $sentenciaInsertGastosMaquina = "insert into gastos_maquina (departamento_id,periodo,byn_unidades,byn_precio,byn_total,color_unidades,color_precio,color_total) values (?,?,?,?,?,?,?,?)";
+$sentenciaInsertDetalleJSON = "insert into trabajodetalle (trabajo_id, tipo_id, detalle_id,unidades, solicitud_id,precioTotal) values (?,?,?,?,?,?)";
+$saveVarios2ExtraJSON = "insert into detalle (detalle_id, tipo_id, descripcion, precio) values (?,?,?,?)";
+$saveVarios2ExtraTrabajoJSON = "insert into trabajodetalle (trabajo_id, tipo_id, detalle_id, unidades, solicitud_id,preciototal) values (?,?,?,?,?,?)";
+$insertTrabajoJSON = "insert into trabajo (trabajo_id, solicitud_id, fecha_inicio, CeCo, codigo, orden, departamento_id, subdepartamento_id) values (?,?,STR_TO_DATE(?, '%d/%m/%Y %r'),?,?,?,?,?)";
 ?>

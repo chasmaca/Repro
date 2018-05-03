@@ -1,4 +1,16 @@
 <?php
+session_start();
+
+echo $_SESSION['login'];
+echo "--";
+echo $_SESSION['role_session'];
+echo "--";
+echo $_SESSION['nombre_session'];
+echo "--";
+echo $_SESSION['userId_session'];
+exit;
+
+
 $pathMenu = "../utiles/menuhor.php";
 $pathCabecera = "../utiles/cabecera_formulario.php";
 $pathAnalitica = "../utiles/analyticstracking.php";

@@ -82,18 +82,6 @@ if (!empty($_POST["subdepartamento"])){
 			<script type="text/javascript" src="../js/tablefilter.js"></script>
 			<link rel="stylesheet" href="../css/styles.css">
 			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-			<script type="text/javascript">
-			    $(function() {
-			      if ($.browser.msie && $.browser.version.substr(0,1)<7)
-			      {
-					$('li').has('ul').mouseover(function(){
-						$(this).children('ul').show();
-						}).mouseout(function(){
-						$(this).children('ul').hide();
-						})
-			      }
-			    });       
-			</script>
 			<style>
 				#cuerpo {
 					position: absolute;
@@ -268,7 +256,8 @@ if (!empty($_POST["subdepartamento"])){
 								foreach ($recuperaInformeArray as $fila ){
 									
 									$total = $fila['byn'] + $fila['color'] + $fila['encuadernacion'] + $fila['varios'] + $fila['totalImpresoras'] + $fila['totalMaquinas'];
-?>
+									$totalFinal = $totalFinal + $total;
+									?>
 										<tbody>
 										<tr>
 											<td id="solESB"><?php echo $fila['departamento_id'];?></td>
@@ -281,13 +270,15 @@ if (!empty($_POST["subdepartamento"])){
 											<td id="solCOL"><?php echo $fila['color'];?></td>
 											<td id="solENC"><?php echo $fila['encuadernacion'];?></td>
 											<td id="solVAR"><?php echo $fila['varios'];?></td>
-											<td id="solTOT"><?php echo $total ?></td>										</tr>
+											<td id="solTOT"><?php echo $total ?></td>					
+										</tr>
 <?php
 									}
 								}else{
 									
 									while ($fila = mysqli_fetch_assoc($recuperaInforme)) {
 									$total = $fila['byn'] + $fila['color'] + $fila['encuadernacion'] + $fila['varios'];
+									$totalFinal = $totalFinal + $total;
 									?>
 									<tbody>
 									<tr>
@@ -306,7 +297,7 @@ if (!empty($_POST["subdepartamento"])){
 <?php 
 									
 								}
-								$totalFinal = $totalFinal + $total;
+								
 								mysqli_free_result($recuperaInforme);
 ?>
 								
@@ -318,10 +309,12 @@ if (!empty($_POST["subdepartamento"])){
 						<tr>
 						<?php if ($tipoInforme == 'detalle') { ?>
 							<td colspan="9"><div style="float:right;">Total Informe</div></td>
-							<td id="table8Tot1"></td>
+							<td id="table8Tot1"><?php echo $totalFinal; ?></td>
 							
-						<?php } ?>
-							
+						<?php } else {?>
+							<td colspan="8"><div style="float:right;">Total Informe</div></td>
+							<td id="table8Tot1"><?php echo $totalFinal; ?></td>
+							<?php } ?>
 						</tr>
 					</tbody>
 					

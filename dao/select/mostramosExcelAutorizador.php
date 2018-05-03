@@ -145,71 +145,73 @@ function mostrarListadoGlobalValidador($periodo,$departamento,$subdepartamento,$
 	echo "\t\t\t\t\t\t\tTOTAL\t".$totalGrupo."\r\n";
 }
 
-function mostrarListadoDetalleValidador($periodo,$departamento,$subdepartamento,$tipoInforme){
+
+function mostrarListadoDetalleValidador($anio,$dpto,$subdpto,$tipoInforme){
 
 	global $mysqlCon, $recuperaInformeDetalleValida;
+
+	header("Content-Disposition: attachment; filename=Informe_Global_Validador.xls");
+	header("Content-Type: application/vnd.ms-excel");
+	$flag = false;
+	
 	
 	/*definimos el json*/
 	$usuario = $_SESSION["userId_session"];
 
-	header("Content-Disposition: attachment; filename=Informe_Detalle_Validador.xls");
-	header("Content-Type: application/vnd.ms-excel");
-	$flag = false;
-	
-	$anioPartido = explode("/",$periodo);
-	
+	$anioPartido = explode("/",$anio);
+
 	$recuperaInformeDetalleValida .= $usuario . ")";
-	
-	if ($departamento == "aa"){
-	
+
+	if ($dpto == "aa"){
+
 		$dpto4Usuario = cargarDptoSessionAsArray($usuario);
-	
+
 		$recuperaInformeDetalleValida .= " and s1.departamento_id in (" . $dpto4Usuario . ") ";
-	
+
 	}else{
-	
-		if ($departamento != 0){
-	
-			$recuperaInformeDetalleValida .= " and s1.departamento_id = " . $departamento;
-	
-			if ($subdepartamento == "aa"){
-	
-				$subdpto4Usuario = cargarSubDptoXDptoAsArray($usuario, $departamento);
-	
+
+		if ($dpto != 0){
+
+			$recuperaInformeDetalleValida .= " and s1.departamento_id = " . $dpto;
+
+			if ($subdpto == "aa"){
+
+				$subdpto4Usuario = cargarSubDptoXDptoAsArray($usuario, $dpto);
+
 				$recuperaInformeDetalleValida = $recuperaInformeDetalleValida . " and s1.subdepartamento_id in (" . $subdpto4Usuario . ") ";
-	
+
 			}else{
-	
-				if ($subdepartamento != 0){
-	
-					$recuperaInformeDetalleValida = $recuperaInformeDetalleValida . " and s1.subdepartamento_id = " . $subdepartamento;
+
+				if ($subdpto != 0){
+
+					$recuperaInformeDetalleValida = $recuperaInformeDetalleValida . " and s1.subdepartamento_id = " . $subdpto;
 				}
 			}
 		}
 	}
-	
+
 	$recuperaInformeDetalleValida .= " and month(s1.fecha_validacion) = " . $anioPartido[0] .
 	" and year(s1.fecha_validacion) = " . $anioPartido[1];
-	
-	if ($departamento == "aa"){
-	
+
+	if ($dpto == "aa"){
+
 		$dpto4Usuario = cargarDptoSessionAsArray($usuario);
-	
-	
+
+
 		$recuperaInformeDetalleValida .= " UNION
 			SELECT
 			'MAQUINA' AS esb,
 			'MAQUINA' AS codigo,
 			'MAQUINA' AS departamento,
 			'MAQUINA' AS subdepartamento,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
 			'' AS fecha,
 			'0' AS encuadernacion,
 			'0' AS byn,
 			'0' AS color,
 			'0' AS varios,
-			'' AS nombre,
-			'' AS apellidos,
-			'' AS descripcion,
 			ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
 			ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
 			'0' AS BYN_IMPRESORA,
@@ -222,41 +224,41 @@ function mostrarListadoDetalleValidador($periodo,$departamento,$subdepartamento,
 			'IMPRESORA' AS codigo,
 			'IMPRESORA' AS departamento,
 			'IMPRESORA' AS subdepartamento,
+			'' AS nombre,
+			'' AS apellidos,
+			'' AS descripcion,
 			'' AS fecha,
 			'0' AS encuadernacion,
 			'0' AS byn,
 			'0' AS color,
 			'0' AS varios,
-			'' AS nombre,
-			'' AS apellidos,
-			'' AS descripcion,
 			'0' AS BYN_MAQUINA,
 			'0' AS COLOR_MAQUINA,
 			ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
 			ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
 			FROM gastos_impresora WHERE departamento_ID IN (".$dpto4Usuario.") AND MONTH(PERIODO) = " . $anioPartido[0] . " AND YEAR(PERIODO) = " . $anioPartido[1];
 	}else{
-		if ($departamento != 0){
-	
+		if ($dpto != 0){
+
 			$recuperaInformeDetalleValida .= " UNION
 				SELECT
 				'MAQUINA' AS esb,
 				'MAQUINA' AS codigo,
 				'MAQUINA' AS departamento,
 				'MAQUINA' AS subdepartamento,
+				'' AS nombre,
+				'' AS apellidos,
+				'' AS descripcion,
 				'' AS fecha,
 				'0' AS encuadernacion,
 				'0' AS byn,
 				'0' AS color,
 				'0' AS varios,
-				'' AS nombre,
-				'' AS apellidos,
-				'' AS descripcion,
 				ROUND(BYN_TOTAL,2) AS BYN_MAQUINA,
 				ROUND(COLOR_TOTAL,2) AS COLOR_MAQUINA,
 				'0' AS BYN_IMPRESORA,
 				'0'  AS COLOR_IMPRESORA
-				FROM gastos_maquina WHERE departamento_ID IN (".$departamento."
+				FROM gastos_maquina WHERE departamento_ID IN (".$dpto."
 						) AND MONTH(PERIODO) = " . $anioPartido[0] . " AND YEAR(PERIODO) = " . $anioPartido[1] . "
 						UNION
 						SELECT
@@ -264,42 +266,58 @@ function mostrarListadoDetalleValidador($periodo,$departamento,$subdepartamento,
 						'IMPRESORA' AS codigo,
 						'IMPRESORA' AS departamento,
 						'IMPRESORA' AS subdepartamento,
+						'' AS nombre,
+						'' AS apellidos,
+						'' AS descripcion,
 						'' AS fecha,
 						'0' AS encuadernacion,
 						'0' AS byn,
 						'0' AS color,
 						'0' AS varios,
-						'' AS nombre,
-						'' AS apellidos,
-						'' AS descripcion,
 						'0' AS BYN_MAQUINA,
 						'0' AS COLOR_MAQUINA,
 						ROUND(BYN_TOTAL,2) AS BYN_IMPRESORA,
 						ROUND(COLOR_TOTAL,2)  AS COLOR_IMPRESORA
-						FROM gastos_impresora WHERE departamento_ID IN (".$departamento.") AND MONTH(PERIODO) = " . $anioPartido[0] . " AND YEAR(PERIODO) = " . $anioPartido[1];
+						FROM gastos_impresora WHERE departamento_ID IN (".$dpto.") AND MONTH(PERIODO) = " . $anioPartido[0] . " AND YEAR(PERIODO) = " . $anioPartido[1];
 		}
 	}
-	
-	$result = mysqli_query($mysqlCon,$recuperaInformeDetalleValida);
-	
+
+	$informeResult = mysqli_query($mysqlCon,$recuperaInformeDetalleValida);
 
 	$totalGrupo = 0;
-	while($row = $result->fetch_assoc()) {
+	while($row = $informeResult->fetch_assoc()) {
+		
 		if(!$flag) {
 			// display field/column names as first row
-			echo implode("\t", array_keys($row)) . "\t SUBTOTAL \r\n";
+			echo implode("\t", array_keys($row)) . "\tSUBTOTAL\r\n";
 			$flag = true;
 		}
+		
 		if ($row!=null){
-			//array_walk($row, __NAMESPACE__ . '\cleanData');
 			$totalLinea = 0;
-			$totalLinea = $row['encuadernacion'] + $row['byn'] + $row['color'] + $row['varios'] + $row['BYN_MAQUINA'] + $row['COLOR_MAQUINA'] + $row['BYN_IMPRESORA'] + $row['COLOR_MAQUINA'];
+			$totalLinea = $row['encuadernacion'] + $row['byn'] + $row['color'] + $row['varios']+$row['BYN_MAQUINA']+$row['COLOR_MAQUINA']+
+					$row['BYN_IMPRESORA']+$row['COLOR_IMPRESORA'];
 			$totalGrupo = $totalGrupo + $totalLinea;
-			echo implode("\t", array_values($row)) . "\t" . $totalLinea . "\r\n";
-			
+	
+			filter_array_empty_value($row);
+			echo $totalLinea."\r\n";
 		}
-			
 	}
-	echo "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tTOTAL\t" . $totalGrupo . "\r\n";
 
+	echo "TOTAL:\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t".$totalGrupo."\r\n";
+		
+}
+
+function filter_array_empty_value($arr){
+	foreach($arr as $k=>$v){
+
+		$v = str_replace("\n","",$v);
+		$v = str_replace(","," ",$v);
+		$v = trim($v);
+
+		echo $v."\t";
+
+	}
+
+	return $arr;
 }

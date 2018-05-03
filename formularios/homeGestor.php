@@ -1,11 +1,10 @@
 <?php
+session_start();
+
 $pathCabecera ="../utiles/cabecera_formulario.php";
-//$pathinforme = "../dao/select/consultaInforme.php";
 $path  = "../utiles/connectDBUtiles.php";
-//$pathDepartamento = "../dao/select/departamentoAutorizador.php";
 $pathPeriodo = "../dao/select/periodo.php";
 $pathAnalitica = "../utiles/analyticstracking.php";
-//$pathSubdepartamento = "../dao/select/subdepartamento.php";
 
 include_once($path);
 include_once($pathPeriodo);
@@ -14,7 +13,7 @@ include_once($pathPeriodo);
 
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="/Repro/css/estilos.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/estilos.css"/>
     	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script type="text/javascript" src="../js/homeGestor.js"></script>
 	
